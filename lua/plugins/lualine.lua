@@ -221,13 +221,6 @@ return {
 
     -- Add components to right sections
 
-    -- ins_right({
-    --   "o:progress",
-    -- color = {
-    --  fg = colors.red,
-    --   gui = "border",
-    --  },
-    -- })
     ins_right({
       "o:encoding", -- option component same as &encoding in viml
       fmt = string.upper, -- I'm not sure why it's upper case either ;)

@@ -9,11 +9,18 @@ return {
           dir = (vim.uv or vim.loop).cwd(),
         })
       end,
-      desc = "Focus on Explorer",
+      desc = "Toggle Explorer",
     },
     {
-      "<leader>r",
-      false,
+      "<leader>e",
+      function()
+        require("neo-tree.command").execute({
+          action = "focus",
+          source = "filesystem",
+          reveal = true,
+        })
+      end,
+      desc = "Focus Explorer",
     },
   },
 }
