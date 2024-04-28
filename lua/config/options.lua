@@ -26,11 +26,8 @@ vim.g.lazygit_config = true
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
 -- * powershell
-local LazyVim = require("lazyvim.util")
+-- local LazyVim = require("lazyvim.util")
 -- LazyVim.terminal.setup("pwsh")
-
-vim.print(LazyVim.is_win())
-
 
 local opt = vim.opt
 

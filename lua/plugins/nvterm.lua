@@ -39,7 +39,6 @@ return {
       "<A-h>",
       function()
         local term = require("nvterm.terminal")
-
         term.toggle("horizontal")
       end,
       desc = "Toggle horizontal terminal",
