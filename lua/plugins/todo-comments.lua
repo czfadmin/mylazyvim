@@ -1,8 +1,8 @@
 return {
-    "folke/todo-comments.nvim",
-    cmd = {"TodoTrouble", "TodoTelescope"},
-    event = "LazyFile",
-    config = true,
+  "folke/todo-comments.nvim",
+  cmd = { "TodoTrouble", "TodoTelescope" },
+  event = "LazyFile",
+  config = true,
     -- stylua: ignore
     keys = {{
         "]t",
@@ -33,4 +33,5 @@ return {
         "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",
         desc = "Todo/Fix/Fixme"
     }}
+,
 }
