@@ -78,4 +78,6 @@ return {
       which_key = true,
     },
   },
+  prioty = 1000,
+  enabled = false,
 }
