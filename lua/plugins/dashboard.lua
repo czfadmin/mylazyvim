@@ -3,12 +3,7 @@ return {
   event = "VeryLazy",
   opts = function()
     local logo = [[
-         ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-         ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
-         ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
-         ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-         ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           
-         ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
+      Project
     ]]
     local LazyVim = require("lazyvim.util")
     logo = string.rep("\n", 8) .. logo .. "\n\n"
@@ -67,11 +62,6 @@ return {
         require("lazy").show()
       end,
       desc = "Open Lazy",
-    },
-    {
-      "<leader>sdd",
-      function() end,
-      desc = "Open lazy dashbaord",
     },
   },
 }
