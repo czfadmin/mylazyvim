@@ -31,7 +31,7 @@ return {
         -- the default case_mode is "smart_case"
       },
     },
-    extensions_list = { "themes", "terms" },
+    extensions_list = { "terms" },
   },
   config = function(_, opts)
     --  dofile(vim.g.base46_cache .. "telescope")
