@@ -36,7 +36,7 @@ return {
       },
       separator_style = "thin",
       numbers = function(opts)
-        return string.format("%s", opts.lower(opts.ordinal))
+        return string.format("%s", opts.ordinal)
       end,
       themable = true,
     },

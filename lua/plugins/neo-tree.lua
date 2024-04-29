@@ -39,6 +39,23 @@ return {
         leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
     },
+    default_component_configs = {
+      git_status = {
+        symbols = {
+          -- Change type
+          added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted = "x", -- this can only be used in the git_status source
+          renamed = "󰁕", -- this can only be used in the git_status source
+          -- Status type
+          untracked = "",
+          ignored = "",
+          unstaged = "󰄱",
+          staged = "",
+          conflict = "",
+        },
+      },
+    },
     window = {
       ["a"] = {
         "add",
@@ -51,7 +68,7 @@ return {
       ["c"] = {
         "copy",
         config = {
-          show_path = "none", -- "none", "relative", "absolute"
+          show_path = "relative", -- "none", "relative", "absolute"
         },
       },
     },
