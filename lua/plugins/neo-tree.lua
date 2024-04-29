@@ -1,5 +1,11 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  opts = {
+    git = {
+      ignore = false,
+      enable = true,
+    },
+  },
   keys = {
     {
       "<c-n>",
@@ -23,4 +29,7 @@ return {
       desc = "Focus Explorer",
     },
   },
+  config = function(_, opts)
+    require("neo-tree").setup(opts)
+  end,
 }
