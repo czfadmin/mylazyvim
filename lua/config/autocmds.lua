@@ -7,7 +7,7 @@
 vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
   callback = function()
-    vim.g.sonokai_style = "atlantis"
-    vim.g.sonokai_better_performance = 1
+    -- vim.g.sonokai_style = "atlantis"
+    -- vim.g.sonokai_better_performance = 1
   end,
 })
