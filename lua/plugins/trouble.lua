@@ -5,6 +5,7 @@ return {
   opts = {
     use_diagnostic_signs = true,
   },
+  lazy = true,
   keys = {
     {
       "<leader>xx",

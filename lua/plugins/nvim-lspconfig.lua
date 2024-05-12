@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  lazy = true,
   dependencies = {
     "jose-elias-alvarez/typescript.nvim",
     init = function()

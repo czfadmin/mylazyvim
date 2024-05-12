@@ -9,7 +9,40 @@ return {
     open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
     sort_case_insensitive = false, -- used when sorting files and directories in the tree
     sort_function = nil, -- use a custom function for sorting files and directories in the tree
+    source_selector = {
+      winbar = true,
+      statusline = true,
+      sources = {
+        {
+          source = "filesystem", -- string
+          display_name = " 󰉓 Files ", -- string | nil
+        },
+        {
+          source = "buffers", -- string
+          display_name = " 󰈚 Buffers ", -- string | nil
+        },
+        {
+          source = "git_status", -- string
+          display_name = " 󰊢 Git ", -- string | nil
+        },
+      },
+      content_layout = "start", -- string
+      tabs_layout = "equal", -- string
+      truncation_character = "…", -- string
+      tabs_min_width = nil, -- int | nil
+      tabs_max_width = nil, -- int | nil
+      padding = 0, -- int | { left: int, right: int }
+      separator = { left = "▏", right = "▕" }, -- string | { left: string, right: string, override: string | nil }
+      separator_active = nil, -- string | { left: string, right: string, override: string | nil } | nil
+      show_separator_on_edge = false, -- boolean
+      highlight_tab = "NeoTreeTabInactive", -- string
+      highlight_tab_active = "NeoTreeTabActive", -- string
+      highlight_background = "NeoTreeTabInactive", -- string
+      highlight_separator = "NeoTreeTabSeparatorInactive", -- string
+      highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
+    },
     filesystem = {
+      find_by_full_path_words = false,
       filtered_items = {
         visible = false, -- when true, they will just be displayed differently than normal items
         hide_dotfiles = false,
@@ -35,17 +68,27 @@ return {
       },
       follow_current_file = {
         enabled = false, -- This will find and focus the file in the active buffer every time
-        --               -- the current file is changed while the tree is open.
         leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      },
+      window = {
+        mappings = {
+          ["<F5>"] = "refresh",
+        },
       },
     },
     default_component_configs = {
+      indent = {
+        with_markers = true,
+        indenet_mark = ":",
+        last_indent_markers = "└",
+        indent_size = 2,
+      },
       git_status = {
         symbols = {
           -- Change type
-          added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
           modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted = "x", -- this can only be used in the git_status source
+          deleted = "-", -- this can only be used in the git_status source
           renamed = "󰁕", -- this can only be used in the git_status source
           -- Status type
           untracked = "",
@@ -59,6 +102,7 @@ return {
     window = {
       ["a"] = {
         "add",
+        noawait = true,
         -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
         config = {
@@ -67,9 +111,37 @@ return {
       },
       ["c"] = {
         "copy",
+        noawait = true,
         config = {
           show_path = "relative", -- "none", "relative", "absolute"
         },
+      },
+    },
+    nesting_rules = {
+      ["js"] = { "js.map" },
+      ["package.json"] = {
+        pattern = "^package%.json$", -- <-- Lua pattern
+        files = { "package-lock.json", "yarn*" }, -- <-- glob pattern
+      },
+      ["go"] = {
+        pattern = "(.*)%.go$", -- <-- Lua pattern with capture
+        files = { "%1_test.go" }, -- <-- glob pattern with capture
+      },
+      ["js-extended"] = {
+        pattern = "(.+)%.js$",
+        files = { "%1.js.map", "%1.min.js", "%1.d.ts" },
+      },
+      ["docker"] = {
+        pattern = "^dockerfile$",
+        ignore_case = true,
+        files = { ".dockerignore", "docker-compose.*", "dockerfile*" },
+      },
+    },
+    event_handers = {
+      {
+        event = "file_added",
+        handler = function(args) end,
+        id = "created_file_and_open_it_later",
       },
     },
   },
