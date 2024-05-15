@@ -5,9 +5,9 @@ return {
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
-    enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
+    reveal = true,
     open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-    sort_case_insensitive = false, -- used when sorting files and directories in the tree
+    sort_case_insensitive = true, -- used when sorting files and directories in the tree
     sort_function = nil, -- use a custom function for sorting files and directories in the tree
     source_selector = {
       winbar = true,
@@ -34,7 +34,7 @@ return {
       padding = 0, -- int | { left: int, right: int }
       separator = { left = "▏", right = "▕" }, -- string | { left: string, right: string, override: string | nil }
       separator_active = nil, -- string | { left: string, right: string, override: string | nil } | nil
-      show_separator_on_edge = false, -- boolean
+      show_separator_on_edge = true, -- boolean
       highlight_tab = "NeoTreeTabInactive", -- string
       highlight_tab_active = "NeoTreeTabActive", -- string
       highlight_background = "NeoTreeTabInactive", -- string
@@ -42,9 +42,9 @@ return {
       highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
     },
     filesystem = {
-      find_by_full_path_words = false,
+      find_by_full_path_words = true,
       filtered_items = {
-        visible = false, -- when true, they will just be displayed differently than normal items
+        visible = true, -- when true, they will just be displayed differently than normal items
         hide_dotfiles = false,
         hide_gitignored = false,
         hide_hidden = true, -- only works on Windows for hidden files/directories
@@ -67,12 +67,13 @@ return {
         },
       },
       follow_current_file = {
-        enabled = false, -- This will find and focus the file in the active buffer every time
+        enabled = true, -- This will find and focus the file in the active buffer every time
         leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
       window = {
         mappings = {
           ["<F5>"] = "refresh",
+          ["P"] = "preview",
         },
       },
     },
@@ -82,6 +83,9 @@ return {
         indenet_mark = ":",
         last_indent_markers = "└",
         indent_size = 2,
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
       },
       git_status = {
         symbols = {
@@ -96,6 +100,20 @@ return {
           unstaged = "󰄱",
           staged = "",
           conflict = "",
+        },
+      },
+      diagnostics = {
+        symbols = {
+          hint = "H",
+          info = "I",
+          warn = "!",
+          error = "X",
+        },
+        highlights = {
+          hint = "DiagnosticSignHint",
+          info = "DiagnosticSignInfo",
+          warn = "DiagnosticSignWarn",
+          error = "DiagnosticSignError",
         },
       },
     },
@@ -121,7 +139,7 @@ return {
       ["js"] = { "js.map" },
       ["package.json"] = {
         pattern = "^package%.json$", -- <-- Lua pattern
-        files = { "package-lock.json", "yarn*" }, -- <-- glob pattern
+        files = { "package-lock.json", "yarn*", "pnpm-lock.yaml" }, -- <-- glob pattern
       },
       ["go"] = {
         pattern = "(.*)%.go$", -- <-- Lua pattern with capture
@@ -142,6 +160,13 @@ return {
         event = "file_added",
         handler = function(args) end,
         id = "created_file_and_open_it_later",
+      },
+      {
+        event = "neo_tree_popup_input_ready",
+        handler = function(args)
+          vim.cmd("stopinsert")
+          vim.keymap.set("i", "<esc>", vim.cmd.stopinsert, { noremap = true, buffer = args.bufnr })
+        end,
       },
     },
   },

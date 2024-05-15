@@ -2,6 +2,7 @@ return {
   "stevearc/conform.nvim",
   dependencies = { "mason.nvim" },
   lazy = true,
+  event = "LazyFile",
   cmd = "ConformInfo",
   opts = {
     formatters_by_ft = {

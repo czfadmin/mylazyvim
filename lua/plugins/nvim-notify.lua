@@ -30,4 +30,5 @@ return {
       end)
     end
   end,
+  enabled = true,
 }
