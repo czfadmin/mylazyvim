@@ -31,7 +31,10 @@ return {
       truncation_character = "…", -- string
       tabs_min_width = nil, -- int | nil
       tabs_max_width = nil, -- int | nil
-      padding = 0, -- int | { left: int, right: int }
+      padding = {
+        left = 0,
+        right = 0,
+      },
       separator = { left = "▏", right = "▕" }, -- string | { left: string, right: string, override: string | nil }
       separator_active = nil, -- string | { left: string, right: string, override: string | nil } | nil
       show_separator_on_edge = true, -- boolean

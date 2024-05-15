@@ -8,7 +8,7 @@ return {
       end,
 
       -- Whether to ignore blank lines when commenting
-      ignore_blank_line = false,
+      ignore_blank_line = true,
 
       -- Whether to recognize as comment only lines without indent
       start_of_line = false,

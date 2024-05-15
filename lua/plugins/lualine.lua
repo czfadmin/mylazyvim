@@ -142,6 +142,15 @@ return {
     })
 
     ins_left({
+      "branch",
+      icon = "",
+      color = {
+        fg = colors.violet,
+        gui = "bold",
+      },
+    })
+
+    ins_left({
       -- filesize component
       "filesize",
       cond = conditions.buffer_not_empty,
@@ -157,14 +166,6 @@ return {
     })
 
     ins_left({ "location" })
-
-    ins_left({
-      "progress",
-      color = {
-        fg = colors.fg,
-        gui = "bold",
-      },
-    })
 
     ins_left({
       "diagnostics",
@@ -195,6 +196,15 @@ return {
       end,
     })
 
+    -- Add components to right sections
+    --
+    ins_right({
+      "progress",
+      color = {
+        fg = colors.fg,
+        gui = "bold",
+      },
+    })
     ins_right({
       -- Lsp server name .
       function()
@@ -219,8 +229,6 @@ return {
       },
     })
 
-    -- Add components to right sections
-
     ins_right({
       "o:encoding", -- option component same as &encoding in viml
       fmt = string.upper, -- I'm not sure why it's upper case either ;)
@@ -237,15 +245,6 @@ return {
       icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
       color = {
         fg = colors.green,
-        gui = "bold",
-      },
-    })
-
-    ins_right({
-      "branch",
-      icon = "",
-      color = {
-        fg = colors.violet,
         gui = "bold",
       },
     })
