@@ -29,9 +29,9 @@ return {
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
       desc = "Switch Buffer",
     },
-    { "<leader>/", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader><space>", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader><space>", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    { "<leader>/", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     -- find
     { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
     { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
