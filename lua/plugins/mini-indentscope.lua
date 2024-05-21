@@ -3,14 +3,13 @@ return {
   version = false, -- wait till new 0.7.0 release to put it back on semver
   event = "LazyFile",
   opts = {
-    -- symbol = "▏",
     symbol = "╎",
     options = { try_as_border = true },
     draw = {
       delay = 50,
-      animation = require('mini.indentscope').gen_animation.none(),
-      priority = 100
-    }
+      animation = require("mini.indentscope").gen_animation.none(),
+      priority = 100,
+    },
   },
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
@@ -32,5 +31,5 @@ return {
       end,
     })
   end,
-  enabled = false,
+  enabled = true,
 }
