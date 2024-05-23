@@ -33,4 +33,10 @@ return {
     { "]]", desc = "Next Reference" },
     { "[[", desc = "Prev Reference" },
   },
+  enabled = function()
+    if vim.fn.has("nvim-0.10") == 1 then
+      return false
+    end
+    return true
+  end,
 }

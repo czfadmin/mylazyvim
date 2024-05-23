@@ -9,6 +9,15 @@ return {
       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
     },
 
+    {
+      "garymjr/nvim-snippets",
+      opts = {
+        friendly_snippets = true,
+        global_snippets = { "all", "global" },
+      },
+      dependencies = { "rafamadriz/friendly-snippets" },
+    },
+
     -- autopairing of (){}[] etc
     {
       "windwp/nvim-autopairs",

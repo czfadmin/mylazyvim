@@ -52,14 +52,15 @@ return {
         hide_gitignored = false,
         hide_hidden = true, -- only works on Windows for hidden files/directories
         hide_by_name = {
-          --"node_modules"
+          "node_modules",
+          ".git",
         },
         hide_by_pattern = { -- uses glob style patterns
           --"*.meta",
           --"*/src/*/tsconfig.json",
         },
         always_show = { -- remains visible even if other settings would normally hide it
-          --".gitignored",
+          ".gitignored",
         },
         never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
           ".DS_Store",
@@ -127,14 +128,14 @@ return {
         -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
         config = {
-          show_path = "relative", -- "none", "relative", "absolute"
+          show_path = "absolute", -- "none", "relative", "absolute"
         },
       },
       ["c"] = {
         "copy",
         noawait = true,
         config = {
-          show_path = "relative", -- "none", "relative", "absolute"
+          show_path = "absolute", -- "none", "relative", "absolute"
         },
       },
     },

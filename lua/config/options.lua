@@ -109,6 +109,7 @@ if vim.fn.has("nvim-0.10") == 1 then
   vim.opt.fillchars = "fold: "
 else
   vim.opt.foldmethod = "indent"
+  vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 end
 
 vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"

@@ -11,7 +11,7 @@ return {
   end,
   opts = function()
     return {
-      separator = " > ",
+      separator = "  ",
       highlight = true,
       depth_limit = 3,
       depth_limit_indicator = "..",
