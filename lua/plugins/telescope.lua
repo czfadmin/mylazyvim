@@ -1,18 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = {
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = vim.fn.executable("make") == 1 and "make"
-        or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-      enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
-      config = function()
-        LazyVim.on_load("telescope.nvim", function()
-          require("telescope").load_extension("fzf")
-        end)
-      end,
-    },
-  },
+  dependencies = {},
   keys = { -- add a keymap to browse plugin files
     -- stylua: ignore
     {
@@ -231,7 +219,7 @@ return {
           },
         },
       },
-      extensions_list = { "fzf", "emoji" },
+      extensions_list = { "fzf", "emoji", "project", "file_browser" },
     }
   end,
   config = function(_, opts)

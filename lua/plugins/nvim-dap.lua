@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-dap",
   lazy = true,
-  event = "VeryLazy",
+  event = "LazyFile",
   dependencies = {
 
     -- fancy UI for the debugger

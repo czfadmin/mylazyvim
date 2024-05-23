@@ -137,7 +137,7 @@ return {
         }
       end,
       padding = {
-        right = 1,
+        right = 0,
       },
     })
 
@@ -154,15 +154,6 @@ return {
       -- filesize component
       "filesize",
       cond = conditions.buffer_not_empty,
-    })
-
-    ins_left({
-      "filename",
-      cond = conditions.buffer_not_empty,
-      color = {
-        fg = colors.magenta,
-        gui = "bold",
-      },
     })
 
     ins_left({ "location" })
@@ -188,6 +179,27 @@ return {
       },
     })
 
+    ins_left({
+      "filename",
+      cond = conditions.buffer_not_empty,
+      color = {
+        fg = colors.magenta,
+        gui = "bold",
+      },
+    })
+
+    ins_left({
+      function()
+        return require("nvim-navic").get_location()
+      end,
+      cond = function()
+        return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+      end,
+      color = {
+        gui = "bold",
+        bg = colors.bg,
+      },
+    })
     -- -- Insert mid section. You can make any number of sections in neovim :)
     -- -- for lualine it's any number greater then 2
     ins_left({
@@ -273,13 +285,22 @@ return {
 
     ins_right({
       function()
+        return os.date("%Y-%m-%d %H:%M:%S", os.time())
+      end,
+      color = {
+        fg = colors.red,
+      },
+    })
+
+    ins_right({
+      function()
         return "▊"
       end,
       color = {
         fg = colors.blue,
       },
       padding = {
-        left = 1,
+        left = 0,
       },
     })
 

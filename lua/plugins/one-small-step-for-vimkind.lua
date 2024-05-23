@@ -1,5 +1,7 @@
 return {
   "jbyuki/one-small-step-for-vimkind",
+  event = "VeryLazy",
+  lazy = true,
   -- stylua: ignore
   config = function()
     local dap = require("dap")
@@ -35,4 +37,5 @@ return {
       },
     }
   end,
+  enabled = false,
 }

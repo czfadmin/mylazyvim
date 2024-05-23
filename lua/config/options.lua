@@ -26,8 +26,6 @@ vim.g.lazygit_config = true
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
 -- * powershell
--- local LazyVim = require("lazyvim.util")
--- LazyVim.terminal.setup("pwsh")
 
 local opt = vim.opt
 
@@ -54,7 +52,7 @@ opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 0 -- Popup blend
-opt.pumheight = 20 -- Maximum number of entries in a popup
+opt.pumheight = 24 -- Maximum number of entries in a popup
 opt.relativenumber = false -- Relative line numbers
 opt.scrolloff = 4 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
@@ -117,3 +115,11 @@ vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- change the default shell
+
+if vim.fn.executable("pwsh") == 1 then
+  vim.go.shell = "pwsh"
+  local LazyVim = require("lazyvim.util")
+  LazyVim.terminal.setup("pwsh")
+end

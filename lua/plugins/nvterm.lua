@@ -1,3 +1,7 @@
+local toggle_modes = { "n", "t" }
+local ft_cmds = {
+  python = "python3" .. vim.fn.expand("%"),
+}
 return {
   "NvChad/nvterm",
   opts = {
@@ -19,8 +23,8 @@ return {
     },
     behavior = {
       autoclose_on_quit = {
-        enabled = false,
-        confirm = true,
+        enabled = true,
+        confirm = false,
       },
       close_on_exit = true,
       auto_insert = true,
@@ -29,27 +33,36 @@ return {
   },
   keys = {
     {
-      "<A-i>",
+      "<C-l>",
       function()
-        local term = require("nvterm.terminal")
-        term.toggle("float")
+        require("nvterm.terminal").send(ft_cmds[vim.bo.filetype])
       end,
     },
     {
+      -- toggle_modes,
       "<A-h>",
       function()
-        local term = require("nvterm.terminal")
-        term.toggle("horizontal")
+        require("nvterm.terminal").toggle("horizontal")
       end,
-      desc = "Toggle horizontal terminal",
     },
     {
+      -- toggle_modes,
       "<A-v>",
       function()
-        local term = require("nvterm.terminal")
-        term.toggle("vertical")
+        require("nvterm.terminal").toggle("vertical")
       end,
-      desc = "Toggle vertical terminal",
+    },
+    {
+      -- toggle_modes,
+      "<A-i>",
+      function()
+        require("nvterm.terminal").toggle("float")
+      end,
+    },
+    {
+      "<leader>spt",
+      function() end,
+      desc = "Pick terminals",
     },
   },
   config = function(_, opts)
