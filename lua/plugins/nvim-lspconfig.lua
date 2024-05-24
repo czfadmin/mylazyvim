@@ -12,6 +12,7 @@ return {
     end,
   },
   opts = {
+    inlay_hints = { enabled = true },
     servers = {
       tsserver = {},
       dartls = {},

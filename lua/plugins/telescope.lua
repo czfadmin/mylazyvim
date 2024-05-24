@@ -143,7 +143,9 @@ return {
           base_dirs = {
             { "~/projects", max_depth = 4 },
           },
-          hidden_files = true, -- default: false
+          exclude_dirs = { "~/.cargo/*", "node_modules/*" },
+          patterns = { ".git", ".svn", "package.json" },
+          hidden_files = false, -- default: false
           theme = "dropdown",
           order_by = "asc",
           search_by = "title",
@@ -159,8 +161,8 @@ return {
           file_browser = {
             path = vim.loop.cwd(),
             cwd = vim.loop.cwd(),
-            cwd_to_path = false,
-            grouped = false,
+            cwd_to_path = true,
+            grouped = true,
             files = true,
             add_dirs = true,
             depth = 1,

@@ -180,6 +180,16 @@ return {
     })
 
     ins_left({
+      function()
+        return "  " .. require("dap").status()
+      end,
+      cond = function()
+        return package.loaded["dap"] and require("dap").status() ~= ""
+      end,
+      color = LazyVim.ui.fg("Debug"),
+    })
+
+    ins_left({
       "filename",
       cond = conditions.buffer_not_empty,
       color = {
@@ -285,7 +295,8 @@ return {
 
     ins_right({
       function()
-        return os.date("%Y-%m-%d %H:%M:%S", os.time())
+        return " " .. os.date("%R")
+        -- return os.date("%Y-%m-%d %H:%M:%S", os.time())
       end,
       color = {
         fg = colors.red,
