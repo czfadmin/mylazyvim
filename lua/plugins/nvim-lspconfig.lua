@@ -14,6 +14,7 @@ return {
   opts = {
     servers = {
       tsserver = {},
+      dartls = {},
     },
     setup = {
       tsserver = function(_, opts)
