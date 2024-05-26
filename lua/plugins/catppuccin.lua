@@ -77,7 +77,23 @@ return {
       treesitter_context = true,
       which_key = true,
     },
+    assets = {
+      lsp = {
+        error = "",
+        warn = "  ",
+        hint = "  ",
+        info = "  ",
+      },
+    },
+    icons = {
+      diagnostics = {
+        Error = "  ",
+        Warn = "  ",
+        Hint = "  ",
+        Info = "  ",
+      },
+    },
   },
-  prioty = 1000,
-  enabled = false,
+  prioty = 1,
+  enabled = true,
 }

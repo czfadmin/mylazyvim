@@ -25,7 +25,12 @@ return {
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       diagnostics_indicator = function(count, level, diag, context)
-        local icons = require("lazyvim.config").icons.diagnostics
+        local icons = {
+          Error = "  ",
+          Warn = "  ",
+          Hint = "  ",
+          Info = "  ",
+        }
         local ret = (diag.error and icons.Error .. diag.error .. " " or "")
           .. (diag.warning and icons.Warn .. diag.warning or "")
         return vim.trim(ret)
@@ -60,6 +65,12 @@ return {
       show_tab_indicators = true,
       show_duplicate_prefix = true,
       themable = true,
+      buffer_close_icon = "󰅖",
+      modified_icon = "●",
+      close_icon = "",
+      left_trunc_marker = "",
+      right_trunc_marker = "",
+      style_preset = require("bufferline").style_preset.no_italic,
       custom_areas = {
         right = function()
           local result = {}
@@ -70,24 +81,60 @@ return {
           local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
           if error ~= 0 then
-            table.insert(result, { text = "  " .. error, fg = "#EC5241" })
+            table.insert(result, { text = "  " .. error, fg = "#EC5241" })
           end
 
           if warning ~= 0 then
-            table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
+            table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
           end
 
           if hint ~= 0 then
-            table.insert(result, { text = "  " .. hint, fg = "#A3BA5E" })
+            table.insert(result, { text = " 󰌶 " .. hint, fg = "#A3BA5E" })
           end
 
           if info ~= 0 then
-            table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
+            table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
           end
 
           table.insert(result, { text = " " })
           return result
         end,
+      },
+      groups = {
+        options = {
+          toggle_hidden_on_enter = false, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
+        },
+        items = {
+          require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+
+          {
+            name = "Tests", -- Mandatory
+            highlight = { underline = true, sp = "blue" }, -- Optional
+            priority = 2, -- determines where it will appear relative to other groups (Optional)
+            icon = "", -- Optional
+            matcher = function(buf) -- Mandatory
+              if buf == nil or buf.filename == nil then
+                return
+              end
+              return buf.filename:match("%_test") or buf.filename:match("%_spec")
+            end,
+          },
+          {
+            name = "Docs",
+            highlight = { undercurl = true, sp = "green" },
+            icon = "󰧮",
+            auto_close = true, -- whether or not close this group if it doesn't contain the current buffer
+            matcher = function(buf)
+              if buf == nil or buf.filename == nil then
+                return
+              end
+              return buf.filename:match("%.md") or buf.filename:match("%.txt")
+            end,
+            separator = { -- Optional
+              style = require("bufferline.groups").separator.tab,
+            },
+          },
+        },
       },
     },
   },

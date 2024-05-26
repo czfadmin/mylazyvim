@@ -1,10 +1,14 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = {},
+  dependencies = {
+    {
+      "nvim-telescope/telescope-media-files.nvim",
+    },
+  },
   keys = { -- add a keymap to browse plugin files
     -- stylua: ignore
     {
-        "<leader>fp",
+        "<leader>fP",
         function()
             require("telescope.builtin").find_files({
                 cwd = require("lazy.core.config").options.root
@@ -39,6 +43,7 @@ return {
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>se", "<cmd>Telescope media_files<cr>", desc = "Preview media files" },
     { "<leader>sg", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>sG", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
@@ -154,8 +159,15 @@ return {
           on_project_selected = function(prompt_bufnr)
             -- Do anything you want in here. For example:
             project_actions.change_working_directory(prompt_bufnr, false)
-            require("harpoon.ui").nav_file(1)
+            -- require("harpoon.ui").nav_file(1)
           end,
+        },
+        media_files = {
+          -- filetypes whitelist
+          -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+          filetypes = { "png", "webp", "jpg", "jpeg" },
+          -- find command (defaults to `fd`)
+          find_cmd = "rg",
         },
         file_browser = {
           file_browser = {
@@ -221,7 +233,7 @@ return {
           },
         },
       },
-      extensions_list = { "fzf", "emoji", "project", "file_browser" },
+      extensions_list = { "fzf", "emoji", "project", "file_browser", "media_files" },
     }
   end,
   config = function(_, opts)

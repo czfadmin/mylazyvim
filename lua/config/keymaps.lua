@@ -11,4 +11,23 @@ map("n", "<leader>l", function()
   require("lazy").show()
 end)
 
-map("n", "<leader>sur", ":silent! luafile ~/.config/nvim/init.lua")
+-- map({ "n", "i", "s", "v" }, "<leader>sua", "<cmd>:wa<cr>", {
+--   silent = true,
+--   desc = "Save all",
+--   noremap = true,
+--   callback = function()
+--     vim.notify("Save all sucessfully!")
+--   end,
+-- })
+--
+map("n", "<leader>sur", ":luafile %", {
+  silent = true,
+  desc = "luafile %",
+  noremap = true,
+})
+
+map({ "n", "v", "s" }, "<leader>sut", "<cmd>Telescope<cr>", {
+  silent = true,
+  desc = "Telescope",
+  noremap = true,
+})

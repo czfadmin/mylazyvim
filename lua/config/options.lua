@@ -31,6 +31,8 @@ local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
 
+opt.autowriteall = true -- Enable auto write all
+
 if not vim.env.SSH_TTY then
   -- only set clipboard if not in ssh, to make sure the OSC 52
   -- integration works automatically. Requires Neovim >= 0.10.0

@@ -56,7 +56,7 @@ return {
           ".git",
         },
         hide_by_pattern = { -- uses glob style patterns
-          --"*.meta",
+          "*.meta",
           --"*/src/*/tsconfig.json",
         },
         always_show = { -- remains visible even if other settings would normally hide it
@@ -84,7 +84,7 @@ return {
     default_component_configs = {
       indent = {
         with_markers = true,
-        indenet_mark = ":",
+        indent_marker = "|",
         last_indent_markers = "└",
         indent_size = 2,
         expander_collapsed = "",
@@ -101,17 +101,17 @@ return {
           -- Status type
           untracked = "",
           ignored = "",
-          unstaged = "󰄱",
+          unstaged = " ",
           staged = "",
           conflict = "",
         },
       },
       diagnostics = {
         symbols = {
-          hint = "H",
-          info = "I",
-          warn = "!",
-          error = "X",
+          hint = "󰌶",
+          info = "",
+          warn = "",
+          error = "",
         },
         highlights = {
           hint = "DiagnosticSignHint",

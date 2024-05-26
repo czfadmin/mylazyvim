@@ -20,6 +20,28 @@ return {
       blue = "#51afef",
       red = "#ec5f67",
     }
+    local mode_color = {
+      n = colors.red,
+      i = colors.green,
+      v = colors.blue,
+      [""] = colors.blue,
+      V = colors.blue,
+      c = colors.magenta,
+      no = colors.red,
+      s = colors.orange,
+      S = colors.orange,
+      [" "] = colors.orange,
+      ic = colors.yellow,
+      R = colors.violet,
+      Rv = colors.violet,
+      cv = colors.red,
+      ce = colors.red,
+      r = colors.cyan,
+      rm = colors.cyan,
+      ["r?"] = colors.cyan,
+      ["!"] = colors.red,
+      t = colors.red,
+    }
 
     local conditions = {
       buffer_not_empty = function()
@@ -94,9 +116,11 @@ return {
       function()
         return "▊"
       end,
-      color = {
-        fg = colors.blue,
-      }, -- Sets highlighting of component
+      color = function()
+        return {
+          fg = mode_color[vim.fn.mode()],
+        } -- Sets highlighting of component
+      end,
       padding = {
         left = 0,
         right = 1,
@@ -106,32 +130,21 @@ return {
     ins_left({
       -- mode component
       function()
-        return "⚡"
+        local mode = {
+          n = "Normal",
+          v = "Visual",
+          o = "Operator-pending",
+          i = "Insert",
+          c = "Cmd-line",
+          s = "Select",
+          x = "Visual",
+          t = "Terminal-Job",
+          ["!"] = "Insert and Cmd-line",
+        }
+        return "⚡" .. mode[vim.fn.mode()]
       end,
       color = function()
         -- auto change color according to neovims mode
-        local mode_color = {
-          n = colors.red,
-          i = colors.green,
-          v = colors.blue,
-          [""] = colors.blue,
-          V = colors.blue,
-          c = colors.magenta,
-          no = colors.red,
-          s = colors.orange,
-          S = colors.orange,
-          [""] = colors.orange,
-          ic = colors.yellow,
-          R = colors.violet,
-          Rv = colors.violet,
-          cv = colors.red,
-          ce = colors.red,
-          r = colors.cyan,
-          rm = colors.cyan,
-          ["r?"] = colors.cyan,
-          ["!"] = colors.red,
-          t = colors.red,
-        }
         return {
           fg = mode_color[vim.fn.mode()],
         }
@@ -162,9 +175,9 @@ return {
       "diagnostics",
       sources = { "nvim_diagnostic" },
       symbols = {
-        error = " ",
-        warn = " ",
-        info = " ",
+        error = " ",
+        warn = " ",
+        info = " ",
       },
       diagnostics_color = {
         color_error = {
@@ -244,7 +257,6 @@ return {
         end
         return msg
       end,
-      -- icon = " : ",
       color = {
         fg = "#ffffff",
         gui = "bold",
@@ -264,7 +276,7 @@ return {
     ins_right({
       "fileformat",
       fmt = string.upper,
-      icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+      icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
       color = {
         fg = colors.green,
         gui = "bold",
@@ -275,9 +287,9 @@ return {
       "diff",
       -- Is it me or the symbol for modified us really weird
       symbols = {
-        added = " ",
-        modified = "󰝤 ",
-        removed = " ",
+        added = " ",
+        modified = " ",
+        removed = " ",
       },
       diff_color = {
         added = {
@@ -307,9 +319,11 @@ return {
       function()
         return "▊"
       end,
-      color = {
-        fg = colors.blue,
-      },
+      color = function()
+        return {
+          fg = mode_color[vim.fn.mode()],
+        } -- Sets highlighting of component
+      end,
       padding = {
         left = 0,
       },
