@@ -7,15 +7,6 @@ local map = vim.keymap.set
 
 -- open lazy
 
--- map({ "n", "i", "s", "v" }, "<leader>sua", "<cmd>:wa<cr>", {
---   silent = true,
---   desc = "Save all",
---   noremap = true,
---   callback = function()
---     vim.notify("Save all sucessfully!")
---   end,
--- })
---
 map("n", "<leader>sur", ":luafile %", {
   silent = true,
   desc = "luafile %",
