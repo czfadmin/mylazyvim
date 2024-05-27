@@ -7,10 +7,6 @@ local map = vim.keymap.set
 
 -- open lazy
 
-map("n", "<leader>l", function()
-  require("lazy").show()
-end)
-
 -- map({ "n", "i", "s", "v" }, "<leader>sua", "<cmd>:wa<cr>", {
 --   silent = true,
 --   desc = "Save all",

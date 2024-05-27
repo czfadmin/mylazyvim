@@ -29,18 +29,20 @@ return {
   },
   keys = {
     {
-      "<A-h>",
-      mode = { "n", "v", "i" },
+      "<A-H>",
+      mode = { "n", "v", "i", "s" },
       function()
         require("nvterm.terminal").toggle("horizontal")
       end,
+      desc = "Toggle horizontal terminal",
     },
     {
-      "<A-v>",
+      "<A-V>",
       mode = { "n", "v", "i", "s" },
       function()
         require("nvterm.terminal").toggle("vertical")
       end,
+      desc = "Toggle vertical terminal",
     },
     {
       "<A-i>",
@@ -48,6 +50,7 @@ return {
       function()
         require("nvterm.terminal").toggle("float")
       end,
+      desc = "Toggle float terminal",
     },
     {
       "<leader>spt",
@@ -95,7 +98,8 @@ return {
             id = term.id,
             win = term.win,
             type = term.type,
-            open = term.buf,
+            open = term.open,
+            ins = term,
           })
         end
 
@@ -118,7 +122,9 @@ return {
                 local selection = action_state.get_selected_entry()
                 actions.close(prompt_bufnr)
                 if selection ~= nil then
-                  nvterm.toggle(selection.value.type)
+                  if not selection.open then
+                    nvterm.toggle(selection.value.type)
+                  end
                   -- local wins = vim.api.nvim_list_wins()
                   -- local bufferInWin
                   -- for _, win in ipairs(wins) do
@@ -144,5 +150,4 @@ return {
   config = function(_, opts)
     require("nvterm").setup(opts)
   end,
-  init = function() end,
 }

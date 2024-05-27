@@ -84,7 +84,7 @@ return {
     {
       "<leader>rp",
       function()
-        require("refactoring").debug.print_var()
+        require("refactoring").debug.print_var({ normal = true, show_success_message = true })
       end,
       mode = "v",
       desc = "Debug Print Variable",
