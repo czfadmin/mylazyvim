@@ -8,6 +8,10 @@ return {
   },
   keys = {
     {
+      "<leader>p",
+      false,
+    },
+    {
       "<leader>pp",
       function()
         require("telescope").extensions.yank_history.yank_history({})

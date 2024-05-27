@@ -21,13 +21,13 @@ return {
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
       desc = "Switch Buffer",
     },
-    { "<leader><space>", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader>ff", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>/", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     -- find
     { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
     { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
-    { "<leader>ff", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    { "<leader><space>", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     { "<leader>fF", LazyVim.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
@@ -103,7 +103,7 @@ return {
       defaults = {
         layout_strategy = "flex",
         layout_config = {
-          prompt_position = "top",
+          prompt_position = "bottom",
         },
         sorting_strategy = "ascending",
         winblend = 0,
