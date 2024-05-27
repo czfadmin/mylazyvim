@@ -2,12 +2,6 @@ return {
   "nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    {
-      -- snippet plugin
-      "L3MON4D3/LuaSnip",
-      dependencies = "rafamadriz/friendly-snippets",
-      opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-    },
 
     {
       "garymjr/nvim-snippets",
@@ -49,6 +43,20 @@ return {
         require("luasnip").lsp_expand(args.body)
       end,
     }
+
+    -- table.insert(opts.mapping, {
+    --   ["<Tab>"] = cmp.mapping(function(fallback)
+    --     if cmp.visible() then
+    --       cmp.select_next_item()
+    --     elseif luasnip.expand_or_locally_jumpable() then
+    --       luasnip.expand_or_jump()
+    --     elseif has_words_before() then
+    --       cmp.complete()
+    --     else
+    --       fallback()
+    --     end
+    --   end, { "i", "s" }),
+    -- })
     table.insert(opts.sources, { name = "luasnip" })
   end,
 }

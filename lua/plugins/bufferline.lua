@@ -21,7 +21,10 @@ return {
       -- TODO: 右键展示上下文菜单
       -- stylua: ignore
       -- right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-      right_mouse_command  = "vertical sbuffer %d",
+      left_mouse_command = function(...)
+        print(...)
+      end,
+      right_mouse_command = "vertical sbuffer %d",
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       diagnostics_indicator = function(count, level, diag, context)
@@ -71,6 +74,14 @@ return {
       left_trunc_marker = "",
       right_trunc_marker = "",
       style_preset = require("bufferline").style_preset.no_italic,
+      -- highlights = {
+      --   fill = {
+      --     bg = {
+      --       attribute = "fg",
+      --       -- highlight = "Pmenu",
+      --     },
+      --   },
+      -- },
       custom_areas = {
         right = function()
           local result = {}
@@ -96,7 +107,26 @@ return {
             table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
           end
 
-          table.insert(result, { text = " " })
+          -- table.insert(result, {
+          --   text = "   ",
+          --   function()
+          --     if vim.o.background ~= "dark" then
+          --       vim.o.background = "light"
+          --     else
+          --       vim.o.background = "dark"
+          --     end
+          --   end,
+          -- })
+          -- table.insert(result, {
+          --   text = "  ",
+          --   function()
+          --     for _, e in ipairs(require("bufferline").get_elements().elements) do
+          --       vim.schedule(function()
+          --         vim.cmd("bd " .. e.id)
+          --       end)
+          --     end
+          --   end,
+          -- })
           return result
         end,
       },

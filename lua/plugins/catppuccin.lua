@@ -1,6 +1,6 @@
 return {
   "catppuccin/nvim",
-  lazy = true,
+  event = "VeryLazy",
   name = "catppuccin",
   opts = {
     flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -94,6 +94,6 @@ return {
       },
     },
   },
-  prioty = 1,
+  prioty = 1000,
   enabled = true,
 }

@@ -21,13 +21,21 @@ return {
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
       desc = "Switch Buffer",
     },
-    { "<leader>ff", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
+    {
+      "<leader>ff",
+      LazyVim.telescope("live_grep", { hidden = true, no_ignore = true, no_ignore_parent = true }),
+      desc = "Grep (Root Dir)",
+    },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>/", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
     -- find
     { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
     { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
-    { "<leader><space>", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    {
+      "<leader><space>",
+      LazyVim.telescope("files", { hidden = true, no_ignore = true, no_ignore_parent = true }),
+      desc = "Find Files (Root Dir)",
+    },
     { "<leader>fF", LazyVim.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
@@ -91,12 +99,12 @@ return {
     local find_files_no_ignore = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { no_ignore = true, default_text = line })()
+      LazyVim.telescope("find_files", { no_ignore_parent = true, no_ignore = true, default_text = line })()
     end
     local find_files_with_hidden = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { hidden = true, default_text = line })()
+      LazyVim.telescope("find_files", { hidden = true, no_ignore = true, no_ignore_parent = true, default_text = line })()
     end
 
     return {
@@ -107,6 +115,11 @@ return {
         },
         sorting_strategy = "ascending",
         winblend = 0,
+        path_display = {
+          -- shorten = 4,
+          "filename_first",
+        },
+        dynamic_preview_title = true,
       },
       get_selection_window = function()
         local wins = vim.api.nvim_list_wins()
@@ -122,6 +135,21 @@ return {
       pickers = {
         find_files = {
           -- theme = "dropdown",
+        },
+      },
+      mappings = {
+        i = {
+          ["<c-t>"] = open_with_trouble,
+          ["<a-t>"] = open_selected_with_trouble,
+          ["<a-i>"] = find_files_no_ignore,
+          ["<a-h>"] = find_files_with_hidden,
+          ["<C-Down>"] = actions.cycle_history_next,
+          ["<C-Up>"] = actions.cycle_history_prev,
+          ["<C-f>"] = actions.preview_scrolling_down,
+          ["<C-b>"] = actions.preview_scrolling_up,
+        },
+        n = {
+          ["q"] = actions.close,
         },
       },
       extensions = {

@@ -22,8 +22,14 @@ map("n", "<leader>sur", ":luafile %", {
   noremap = true,
 })
 
-map({ "n", "v", "s" }, "<leader>sut", "<cmd>Telescope<cr>", {
+map({ "n", "v", "s" }, "<leader>sut", ":Telescope<cr>", {
   silent = true,
   desc = "Telescope",
+  noremap = true,
+})
+
+map({ "n", "v", "s" }, "<leader>suc", ":Cheatsheet<cr>", {
+  silent = true,
+  desc = "Cheatsheet",
   noremap = true,
 })
