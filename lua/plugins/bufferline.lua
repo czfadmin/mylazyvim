@@ -116,6 +116,8 @@ return {
           --     end
           --   end,
           -- })
+          --
+          table.insert(result, { text = " " })
           return result
         end,
       },

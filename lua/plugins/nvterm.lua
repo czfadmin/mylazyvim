@@ -122,7 +122,7 @@ return {
                 local selection = action_state.get_selected_entry()
                 actions.close(prompt_bufnr)
                 if selection ~= nil then
-                  if not selection.open then
+                  if not selection.open and selection.value ~= nil then
                     nvterm.toggle(selection.value.type)
                   end
                   -- local wins = vim.api.nvim_list_wins()
