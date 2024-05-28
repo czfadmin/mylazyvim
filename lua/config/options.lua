@@ -39,9 +39,9 @@ if not vim.env.SSH_TTY then
   opt.clipboard = "unnamedplus" -- Sync with system clipboard
 end
 
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noselect,noinsert"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.confirm = false -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
@@ -50,7 +50,11 @@ opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.laststatus = 3 -- global statusline
-opt.list = true -- Show some invisible characters (tabs...
+opt.list = false -- Show some invisible characters (tabs...
+opt.listchars = "space:·,tab:>-"
+opt.autoread = true
+opt.smartindent = true
+opt.autoindent = true
 opt.mouse = "a" -- Enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 0 -- Popup blend
@@ -72,16 +76,14 @@ opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
-if not vim.g.vscode then
-  opt.timeoutlen = 300 -- Lower than default (1000) to quickly trigger which-key
-end
+opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 2 -- Minimum window width
-opt.wrap = true -- Disable line wrap
+opt.wrap = true
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
