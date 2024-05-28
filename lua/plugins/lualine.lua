@@ -216,7 +216,7 @@ return {
         return require("nvim-navic").get_location()
       end,
       cond = function()
-        return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+        return package.loaded["nvim-navic"] and require("nvim-navic").is_available() and conditions.hide_in_width
       end,
       color = {
         gui = "bold",
