@@ -23,7 +23,10 @@ return {
     },
     {
       "<leader>ff",
-      LazyVim.telescope("live_grep", { hidden = true, no_ignore = true, no_ignore_parent = true }),
+      LazyVim.telescope(
+        "live_grep",
+        { hidden = true, no_ignore = false, no_ignore_parent = false, show_untracked = true }
+      ),
       desc = "Grep (Root Dir)",
     },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -33,7 +36,7 @@ return {
     { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
     {
       "<leader><space>",
-      LazyVim.telescope("files", { hidden = true, no_ignore = true, no_ignore_parent = true }),
+      LazyVim.telescope("files", { hidden = true, no_ignore = true, no_ignore_parent = false, show_untracked = true }),
       desc = "Find Files (Root Dir)",
     },
     { "<leader>fF", LazyVim.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
@@ -52,8 +55,20 @@ return {
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
     { "<leader>se", "<cmd>Telescope media_files<cr>", desc = "Preview media files" },
-    { "<leader>sg", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
-    { "<leader>sG", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+    {
+      "<leader>sg",
+      LazyVim.telescope("live_grep", {
+        hidden = true,
+        no_ignore = true,
+        no_ingore_parent = true,
+      }),
+      desc = "Grep (Root Dir)",
+    },
+    {
+      "<leader>sG",
+      LazyVim.telescope("live_grep", { cwd = false, hidden = true, no_ignore = true, no_ingore_parent = true }),
+      desc = "Grep (cwd)",
+    },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },

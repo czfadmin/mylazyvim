@@ -67,6 +67,15 @@ return {
       mode = "",
       desc = "Format buffer",
     },
+    {
+      -- Customize or remove this keymap to your liking
+      "<A-F>",
+      function()
+        require("conform").format({ async = true, lsp_fallback = true })
+      end,
+      mode = { "i", "v", "n" },
+      desc = "Format buffer",
+    },
   },
   init = function()
     -- Install the conform formatter on VeryLazy
