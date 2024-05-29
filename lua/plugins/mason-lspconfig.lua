@@ -2,16 +2,7 @@ return {
   "williamboman/mason-lspconfig.nvim",
   lazy = true,
   opts = {
-    ensure_installed = {
-      "stylua",
-      "shellcheck",
-      "shfmt",
-      "flake8",
-      "prettier",
-      "biome",
-      "js-debug-adapter",
-      "codelldb",
-    },
+    ensure_installed = {},
     -- Makes a best effort to setup the various debuggers with
     -- reasonable debug configurations
     automatic_installation = false,

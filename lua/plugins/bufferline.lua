@@ -96,27 +96,6 @@ return {
             table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
           end
 
-          -- table.insert(result, {
-          --   text = "   ",
-          --   function()
-          --     if vim.o.background ~= "dark" then
-          --       vim.o.background = "light"
-          --     else
-          --       vim.o.background = "dark"
-          --     end
-          --   end,
-          -- })
-          -- table.insert(result, {
-          --   text = "  ",
-          --   function()
-          --     for _, e in ipairs(require("bufferline").get_elements().elements) do
-          --       vim.schedule(function()
-          --         vim.cmd("bd " .. e.id)
-          --       end)
-          --     end
-          --   end,
-          -- })
-          --
           table.insert(result, { text = " " })
           return result
         end,

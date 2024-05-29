@@ -13,6 +13,10 @@ map("n", "<leader>sur", ":luafile %", {
   noremap = true,
 })
 
+map({ "n", "v", "s" }, "<C-A>", "<cmd>:normal gg<cr>vG<cr>", {
+  desc = "Select all",
+})
+
 map({ "n", "v", "s" }, "<leader>sut", ":Telescope<cr>", {
   silent = true,
   desc = "Telescope",

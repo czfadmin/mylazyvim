@@ -9,7 +9,6 @@ return {
       "flake8",
       "prettier",
       "biome",
-      "js-debug-adapter",
       "codelldb",
     },
   },
