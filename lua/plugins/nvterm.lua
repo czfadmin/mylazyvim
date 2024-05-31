@@ -54,7 +54,7 @@ return {
     },
     {
       "<leader>spt",
-      mode = { "n", "v", "s", "t", "i" },
+      mode = { "n", "v", "s", "t" },
       function()
         local nvterm = require("nvterm.terminal")
         local terminals = nvterm.list_terms()
