@@ -21,9 +21,6 @@ return {
       -- TODO: 右键展示上下文菜单
       -- stylua: ignore
       -- right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-      left_mouse_command = function(...)
-        print(...)
-      end,
       right_mouse_command = "vertical sbuffer %d",
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
@@ -74,14 +71,6 @@ return {
       left_trunc_marker = "",
       right_trunc_marker = "",
       style_preset = require("bufferline").style_preset.no_italic,
-      -- highlights = {
-      --   fill = {
-      --     bg = {
-      --       attribute = "fg",
-      --       -- highlight = "Pmenu",
-      --     },
-      --   },
-      -- },
       custom_areas = {
         right = function()
           local result = {}
