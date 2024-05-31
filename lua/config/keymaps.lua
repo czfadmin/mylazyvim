@@ -38,3 +38,8 @@ map({ "n", "v", "s", "i" }, "<C-S>", "<cmd>:wa<cr>", {
     vim.notify_once("Save all buffers", vim.log.levels.INFO, {})
   end,
 })
+
+map({ "n", "v", "s" }, "?", "<cmd>:h<cr>", {
+  silent = true,
+  desc = "Help",
+})

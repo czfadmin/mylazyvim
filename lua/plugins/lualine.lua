@@ -67,23 +67,24 @@ return {
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",
-        theme = {
-          -- We are going to use lualine_c an lualine_x as left and
-          -- right section. Both are highlighted by c theme .  So we
-          -- are just setting default looks o statusline
-          normal = {
-            c = {
-              fg = colors.fg,
-              bg = colors.bg,
-            },
-          },
-          inactive = {
-            c = {
-              fg = colors.inactive_fg,
-              bg = colors.inactive_bg,
-            },
-          },
-        },
+        theme = "auto",
+        -- theme = {
+        --   -- We are going to use lualine_c an lualine_x as left and
+        --   -- right section. Both are highlighted by c theme .  So we
+        --   -- are just setting default looks o statusline
+        --   normal = {
+        --     c = {
+        --       fg = colors.fg,
+        --       bg = colors.bg,
+        --     },
+        --   },
+        --   inactive = {
+        --     c = {
+        --       fg = colors.inactive_fg,
+        --       bg = colors.inactive_bg,
+        --     },
+        --   },
+        -- },
       },
       sections = {
         -- these are to remove the defaults
@@ -320,7 +321,6 @@ return {
         fg = colors.red,
       },
     })
-
     ins_right({
       function()
         return "▊"
@@ -335,18 +335,7 @@ return {
       },
     })
 
-    -- vim.api.nvim_create_autocmd("BufAdd", {
-    --   callback = function()
-    --     vim.schedule(function()
-    --       local lualine = require("lualine")
-    --       if lualine ~= nil then
-    --         lualine.setup(opts)
-    --       end
-    --     end)
-    --   end,
-    -- })
-
-    return opts
+    return config
   end,
   enable = true,
 }

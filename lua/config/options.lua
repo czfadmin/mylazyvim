@@ -32,7 +32,8 @@ local opt = vim.opt
 opt.autowrite = true -- Enable auto write
 
 opt.autowriteall = true -- Enable auto write all
-
+-- Show the current document symbols location from Trouble in lualine
+vim.g.trouble_lualine = true
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect,noinsert"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions

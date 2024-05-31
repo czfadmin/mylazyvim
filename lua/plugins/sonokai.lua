@@ -1,5 +1,6 @@
 return {
   "sainnhe/sonokai",
+  event = "VeryLazy",
   config = function()
     vim.g.sonkai_enable_italic = true
     vim.g.sonokai_style = "atlantis"
@@ -11,6 +12,5 @@ return {
     vim.g.sonokai_diagnostic_virtual_text = "colored"
     vim.g.sonokai_current_word = "grey background"
     vim.g.sonokai_inlay_hints_background = "dimmend"
-    vim.cmd.colorscheme("sonokai")
   end,
 }

@@ -2,7 +2,7 @@
 return {
   "LazyVim/LazyVim",
   opts = {
-    colorscheme = "sonokai",
+    colorscheme = "catppuccin",
     icons = {
       diagnostics = {
         Error = " ",
