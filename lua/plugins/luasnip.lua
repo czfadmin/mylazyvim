@@ -7,7 +7,11 @@ return {
   dependencies = "rafamadriz/friendly-snippets",
   opts = {
     history = true,
+    store_selection_keys = "<Tab>",
     updateevents = "TextChanged,TextChangedI",
+    region_check_events = "InsertEnter",
+    delete_check_events = "InsertLeave",
+    enable_autosnippets = true,
     ext_opts = {
       [types.choiceNode] = {
         active = {

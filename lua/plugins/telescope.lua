@@ -111,7 +111,34 @@ return {
       defaults = {
         layout_strategy = "flex",
         layout_config = {
-          prompt_position = "bottom",
+          bottom_pane = {
+            height = 25,
+            preview_cutoff = 120,
+            prompt_position = "top",
+          },
+          center = {
+            height = 0.4,
+            preview_cutoff = 40,
+            prompt_position = "top",
+            width = 0.5,
+          },
+          cursor = {
+            height = 0.9,
+            preview_cutoff = 40,
+            width = 0.8,
+          },
+          horizontal = {
+            height = 0.9,
+            preview_cutoff = 120,
+            prompt_position = "bottom",
+            width = 0.8,
+          },
+          vertical = {
+            height = 0.9,
+            preview_cutoff = 40,
+            prompt_position = "bottom",
+            width = 0.8,
+          },
         },
         sorting_strategy = "ascending",
         winblend = 0,
@@ -119,8 +146,25 @@ return {
           -- shorten = 4,
           "filename_first",
         },
+        -- path_display = function(opts, path)
+        -- local tail = require("telescope.utils").path_tail(path)
+        -- path = string.format("%s (%s)", tail, path)
+
+        --   local highlights = {
+        --     {
+        --       {
+        --         0, -- highlight start position
+        --         #path, -- highlight end position
+        --       },
+        --       "Comment", -- highlight group name
+        --     },
+        --   }
+        --
+        --   return path, highlights
+        -- end,
         dynamic_preview_title = true,
       },
+      wrap_results = true,
       get_selection_window = function()
         local wins = vim.api.nvim_list_wins()
         table.insert(wins, 1, vim.api.nvim_get_current_win())

@@ -30,7 +30,7 @@ return {
   keys = {
     {
       "<A-H>",
-      mode = { "n", "v", "i", "s" },
+      mode = { "n", "v", "i", "s", "t" },
       function()
         require("nvterm.terminal").toggle("horizontal")
       end,
@@ -38,7 +38,7 @@ return {
     },
     {
       "<A-V>",
-      mode = { "n", "v", "i", "s" },
+      mode = { "n", "v", "i", "s", "t" },
       function()
         require("nvterm.terminal").toggle("vertical")
       end,
@@ -46,7 +46,7 @@ return {
     },
     {
       "<A-i>",
-      mode = { "n", "v", "i", "s" },
+      mode = { "n", "v", "i", "s", "t" },
       function()
         require("nvterm.terminal").toggle("float")
       end,
@@ -54,7 +54,7 @@ return {
     },
     {
       "<leader>spt",
-      mode = { "n", "v", "s" },
+      mode = { "n", "v", "s", "t", "i" },
       function()
         local nvterm = require("nvterm.terminal")
         local terminals = nvterm.list_terms()
