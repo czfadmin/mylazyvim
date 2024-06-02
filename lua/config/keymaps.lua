@@ -29,13 +29,14 @@ map({ "n", "v", "s" }, "<leader>suc", ":Cheatsheet<cr>", {
   noremap = true,
 })
 
-map({ "n", "v", "s", "i" }, "<C-S>", "<cmd>:wa<cr>", {
+map({ "n", "v", "s" }, "<leader>sf", function()
+  vim.cmd("wa")
+end, {
   silent = true,
   desc = "Save all buffers",
   noremap = true,
-  buffer = true,
   callback = function()
-    vim.notify_once("Save all buffers", vim.log.levels.INFO, {})
+    vim.notify("Save all buffers successfully", vim.log.levels.INFO, {})
   end,
 })
 

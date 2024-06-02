@@ -57,7 +57,7 @@ return {
       end,
       separator_style = "thin",
       numbers = function(opts)
-        return string.format("%s", opts.ordinal)
+        return string.format("%s·%s", opts.ordinal, opts.id)
       end,
       show_buffer_icons = true,
       show_buffer_close_icons = true,
