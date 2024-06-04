@@ -56,7 +56,6 @@ opt.inccommand = "nosplit" -- preview incremental substitute
 opt.laststatus = 3 -- global statusline
 opt.list = false -- Show some invisible characters (tabs...
 opt.listchars = "space:·,tab:>-"
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 opt.autoread = true
 opt.smartindent = true
 opt.autoindent = true
@@ -91,32 +90,8 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
 
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-end
-
 -- Folding
 vim.opt.foldlevel = 99
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
-  vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
-
--- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-  vim.opt.foldtext = ""
-  vim.opt.fillchars = "fold: "
-else
-  vim.opt.foldmethod = "indent"
-  vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
-end
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
-
 -- change the default shell
 
 if vim.fn.executable("pwsh") == 1 then
