@@ -52,7 +52,7 @@ return {
         show_end = false,
         highlight = { "Function", "Label" },
         injected_languages = true,
-        priority = 20,
+        priority = 200,
       },
       exclude = {
         filetypes = {

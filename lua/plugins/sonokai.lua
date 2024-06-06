@@ -13,4 +13,5 @@ return {
     vim.g.sonokai_current_word = "grey background"
     vim.g.sonokai_inlay_hints_background = "dimmend"
   end,
+  enabled = false,
 }

@@ -1,8 +1,10 @@
 return {
   "folke/trouble.nvim",
   keys = {},
+  event = "LazyFile",
   opts = {
     auto_close = false,
+    restore = false,
     auto_refresh = true,
     modes = {
       preview_float = {

@@ -145,6 +145,10 @@ return {
         pattern = "^package%.json$", -- <-- Lua pattern
         files = { "package-lock.json", "yarn*", "pnpm-lock.yaml" }, -- <-- glob pattern
       },
+      ["tsconfig.json"] = {
+        pattern = "^tsconfig%.json$", -- <-- Lua pattern
+        files = { "tsconfig.*.json" }, -- <-- glob pattern
+      },
       ["go"] = {
         pattern = "(.*)%.go$", -- <-- Lua pattern with capture
         files = { "%1_test.go" }, -- <-- glob pattern with capture

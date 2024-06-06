@@ -1,2 +1,2 @@
 -- add gruvbox
-return { "ellisonleao/gruvbox.nvim", enabled = true, event = "VeryLazy" }
+return { "ellisonleao/gruvbox.nvim", enabled = false, event = "VeryLazy" }

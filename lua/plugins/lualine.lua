@@ -7,6 +7,8 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   opts = function(_, opts)
+    -- local macchiato = require("catppuccin.palettes").get_palette()
+
     local colors = {
       inactive_fg = "#bbc2cf",
       inactive_bg = "#20232a",
@@ -216,20 +218,35 @@ return {
       },
     })
 
+    -- ins_left({
+    --   function()
+    --     return require("nvim-navic").get_location()
+    --   end,
+    --   cond = function()
+    --     return package.loaded["nvim-navic"]
+    --       and require("nvim-navic").is_available()
+    --       and conditions.hide_in_width()
+    --       and conditions.buffer_not_empty()
+    --   end,
+    --   color = {
+    --     gui = "bold",
+    --     bg = colors.bg,
+    --   },
+    -- })
+    --
+    local trouble = require("trouble")
+    local symbols = trouble.statusline({
+      mode = "lsp_document_symbols",
+      groups = {},
+      title = false,
+      filter = { range = true },
+      format = "{kind_icon}{symbol.name:Normal}",
+      hl_group = "lualine_c_normal",
+    })
+    --
     ins_left({
-      function()
-        return require("nvim-navic").get_location()
-      end,
-      cond = function()
-        return package.loaded["nvim-navic"]
-          and require("nvim-navic").is_available()
-          and conditions.hide_in_width()
-          and conditions.buffer_not_empty()
-      end,
-      color = {
-        gui = "bold",
-        bg = colors.bg,
-      },
+      symbols.get,
+      cond = symbols.has,
     })
     -- -- Insert mid section. You can make any number of sections in neovim :)
     -- -- for lualine it's any number greater then 2

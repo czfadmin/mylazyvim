@@ -74,10 +74,6 @@ return {
         CmpItemAbbrMatchFuzzy = { fg = C.mauve, bg = "NONE", bold = true },
         CursorLine = { bg = "#363a52" },
         CursorLineNr = { fg = C.red, bold = true },
-        tab_selected = {
-          fg = C.text,
-          bg = "#3f435c",
-        },
       }
     end,
     default_integrations = true,
