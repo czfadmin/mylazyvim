@@ -40,7 +40,7 @@ end, {
   end,
 })
 
-map({ "n", "v", "s" }, "?", "<cmd>:h<cr>", {
-  silent = true,
-  desc = "Help",
-})
+-- map({ "n", "v", "s" }, "?", "<cmd>:h<cr>", {
+--   silent = true,
+--   desc = "Help",
+-- })

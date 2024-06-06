@@ -36,6 +36,9 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
     },
+    {
+      "onsails/lspkind.nvim",
+    },
   },
   opts = function(_, opts)
     opts.snippet = {
@@ -44,19 +47,34 @@ return {
       end,
     }
 
-    -- table.insert(opts.mapping, {
-    --   ["<Tab>"] = cmp.mapping(function(fallback)
-    --     if cmp.visible() then
-    --       cmp.select_next_item()
-    --     elseif luasnip.expand_or_locally_jumpable() then
-    --       luasnip.expand_or_jump()
-    --     elseif has_words_before() then
-    --       cmp.complete()
-    --     else
-    --       fallback()
-    --     end
-    --   end, { "i", "s" }),
-    -- })
+    opts.window = {
+      completion = {
+        -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        col_offset = -3,
+        side_padding = 0,
+      },
+    }
+
+    opts.views = {
+      entries = { name = "custom", selection_order = "near_cursor" },
+    }
+
+    opts.formatting = {
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+        local kind = require("lspkind").cmp_format({
+          mode = "symbol_text",
+          maxwidth = 50,
+          show_labelDetails = true,
+          ellipsis_char = "....",
+        })(entry, vim_item)
+        local strings = vim.split(kind.kind, "%s", { trimempty = true })
+        kind.kind = " " .. (strings[1] or "") .. " "
+        kind.menu = "    " .. (strings[2] or "") .. " "
+        return kind
+      end,
+    }
+
     table.insert(opts.sources, { name = "luasnip" })
   end,
 }
