@@ -8,7 +8,7 @@ return {
       mode = { "n" },
       function()
         local project_actions = require("telescope._extensions.project.actions")
-        project_actions.add_project_cwd()
+        project_actions.add_project_cwd({})
       end,
       -- ":lua require'telescope'.extensions.project.project{}<CR>",
       desc = "Projects: add project (cwd)",

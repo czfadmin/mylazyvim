@@ -49,13 +49,13 @@ return {
 
     opts.window = {
       completion = {
-        -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        winhighlight = "Normal:Pmenu,FloatBorder:PmenuSel,Search:None",
         col_offset = -3,
         side_padding = 0,
       },
     }
 
-    opts.views = {
+    opts.view = {
       entries = { name = "custom", selection_order = "near_cursor" },
     }
 
@@ -64,9 +64,9 @@ return {
       format = function(entry, vim_item)
         local kind = require("lspkind").cmp_format({
           mode = "symbol_text",
-          maxwidth = 50,
+          maxwidth = 80,
           show_labelDetails = true,
-          ellipsis_char = "....",
+          ellipsis_char = "...",
         })(entry, vim_item)
         local strings = vim.split(kind.kind, "%s", { trimempty = true })
         kind.kind = " " .. (strings[1] or "") .. " "
@@ -74,7 +74,6 @@ return {
         return kind
       end,
     }
-
     table.insert(opts.sources, { name = "luasnip" })
   end,
 }

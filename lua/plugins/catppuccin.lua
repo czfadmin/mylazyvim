@@ -40,6 +40,8 @@ return {
     color_overrides = {},
     custom_highlights = function(C)
       return {
+        CmpItemMenu = { fg = C.mauve, bg = "NONE" },
+        CmpItemAbbrDeprecated = { fg = C.base, bg = "NONE", strikethrough = true },
         CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
         CmpItemKindKeyword = { fg = C.base, bg = C.red },
         CmpItemKindText = { fg = C.base, bg = C.teal },
@@ -72,6 +74,10 @@ return {
         CmpItemAbbrMatchFuzzy = { fg = C.mauve, bg = "NONE", bold = true },
         CursorLine = { bg = "#363a52" },
         CursorLineNr = { fg = C.red, bold = true },
+        tab_selected = {
+          fg = C.text,
+          bg = "#3f435c",
+        },
       }
     end,
     default_integrations = true,

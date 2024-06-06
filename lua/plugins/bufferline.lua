@@ -4,6 +4,7 @@ local icons = {
   Hint = "  ",
   Info = "  ",
 }
+
 return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",
@@ -100,6 +101,7 @@ return {
           return result
         end,
       },
+
       groups = {
         options = {
           toggle_hidden_on_enter = false, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
@@ -139,6 +141,15 @@ return {
     },
   },
   config = function(_, opts)
+    local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+    opts.highlights = require("catppuccin.groups.integrations.bufferline").get({
+      styles = { "bold" },
+      custom = {
+        all = {
+          -- buffer_selected = { fg = macchiato.sky, bg = "#3f435c", bold = true },
+        },
+      },
+    })
     require("bufferline").setup(opts)
     -- Fix bufferline when restoring a session
     vim.api.nvim_create_autocmd("BufAdd", {
