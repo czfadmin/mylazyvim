@@ -5,7 +5,7 @@ return {
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
-    reveal = true,
+    reveal = false,
     open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
     sort_case_insensitive = true, -- used when sorting files and directories in the tree
     sort_function = nil, -- use a custom function for sorting files and directories in the tree
@@ -71,8 +71,8 @@ return {
         },
       },
       follow_current_file = {
-        enabled = true, -- This will find and focus the file in the active buffer every time
-        leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        enabled = false, -- This will find and focus the file in the active buffer every time
+        leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
       },
       window = {
         mappings = {
@@ -94,7 +94,7 @@ return {
       git_status = {
         symbols = {
           -- Change type
-          added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+          added = "󰐕", -- or "✚", but this is redundant info if you use git_status_colors on the name
           modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
           deleted = "-", -- this can only be used in the git_status source
           renamed = "󰁕", -- this can only be used in the git_status source
