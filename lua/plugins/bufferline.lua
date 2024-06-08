@@ -1,3 +1,9 @@
+local icons = {
+  Error = "  ",
+  Warn = "  ",
+  Hint = "  ",
+  Info = "  ",
+}
 return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",
@@ -25,12 +31,6 @@ return {
       diagnostics = "nvim_lsp",
       always_show_bufferline = true,
       diagnostics_indicator = function(count, level, diag, context)
-        local icons = {
-          Error = "  ",
-          Warn = "  ",
-          Hint = "  ",
-          Info = "  ",
-        }
         local ret = (diag.error and icons.Error .. diag.error .. " " or "")
           .. (diag.warning and icons.Warn .. diag.warning or "")
         return vim.trim(ret)
@@ -81,19 +81,19 @@ return {
           local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
           if error ~= 0 then
-            table.insert(result, { text = "  " .. error, fg = "#EC5241" })
+            table.insert(result, { text = icons.Error .. error, fg = "#EC5241" })
           end
 
           if warning ~= 0 then
-            table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
+            table.insert(result, { text = icons.Warn .. warning, fg = "#EFB839" })
           end
 
           if hint ~= 0 then
-            table.insert(result, { text = " 󰌶 " .. hint, fg = "#A3BA5E" })
+            table.insert(result, { text = icons.Hint .. hint, fg = "#A3BA5E" })
           end
 
           if info ~= 0 then
-            table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
+            table.insert(result, { text = icons.Info .. info, fg = "#7EA9A7" })
           end
 
           table.insert(result, { text = " " })

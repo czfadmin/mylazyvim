@@ -94,6 +94,5 @@ return {
       },
     },
   },
-  prioty = 1000,
   enabled = true,
 }
