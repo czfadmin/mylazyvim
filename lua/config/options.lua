@@ -89,7 +89,7 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
-
+opt.showtabline = 2 -- 总是显示tabline
 -- Folding
 vim.opt.foldlevel = 99
 -- change the default shell

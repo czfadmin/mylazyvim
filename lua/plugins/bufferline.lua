@@ -30,6 +30,7 @@ return {
       -- right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
       right_mouse_command = "vertical sbuffer %d",
       diagnostics = "nvim_lsp",
+      auto_toggle_bufferline = true,
       always_show_bufferline = true,
       diagnostics_indicator = function(count, level, diag, context)
         local ret = (diag.error and icons.Error .. diag.error .. " " or "")
