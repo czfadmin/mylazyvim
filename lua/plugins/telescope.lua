@@ -1,48 +1,23 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = {
-    {
-      "nvim-telescope/telescope-media-files.nvim",
-    },
-  },
-  keys = { -- add a keymap to browse plugin files
-    -- stylua: ignore
-    {
-        "<leader>fP",
-        function()
-            require("telescope.builtin").find_files({
-                cwd = require("lazy.core.config").options.root
-            })
-        end,
-        desc = "Find Plugin File"
-    },
+  dependencies = { { "nvim-telescope/telescope-media-files.nvim" } },
+  keys = {
     {
       "<leader>,",
       "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
       desc = "Switch Buffer",
     },
-    {
-      "<leader>ff",
-      LazyVim.telescope(
-        "live_grep",
-        { hidden = true, no_ignore = false, no_ignore_parent = false, show_untracked = true }
-      ),
-      desc = "Grep (Root Dir)",
-    },
+    { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader>/", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+    { "<leader><space>", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
     -- find
     { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-    { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
-    {
-      "<leader><space>",
-      LazyVim.telescope("files", { hidden = true, no_ignore = true, no_ignore_parent = false, show_untracked = true }),
-      desc = "Find Files (Root Dir)",
-    },
-    { "<leader>fF", LazyVim.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+    { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
+    { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+    { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-    { "<leader>fR", LazyVim.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+    { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
     -- git
     { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
     { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
@@ -54,39 +29,28 @@ return {
     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
-    { "<leader>se", "<cmd>Telescope media_files<cr>", desc = "Preview media files" },
-    {
-      "<leader>sg",
-      LazyVim.telescope("live_grep", {
-        hidden = true,
-        no_ignore = true,
-        no_ingore_parent = true,
-      }),
-      desc = "Grep (Root Dir)",
-    },
-    {
-      "<leader>sG",
-      LazyVim.telescope("live_grep", { cwd = false, hidden = true, no_ignore = true, no_ingore_parent = true }),
-      desc = "Grep (cwd)",
-    },
+    { "<leader>sg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+    { "<leader>sG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+    { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
     { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-    { "<leader>sw", LazyVim.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
-    { "<leader>sW", LazyVim.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-    { "<leader>sw", LazyVim.telescope("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
-    { "<leader>sW", LazyVim.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
-    { "<leader>uC", LazyVim.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
+    { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
+    { "<leader>sw", LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+    { "<leader>sW", LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
+    { "<leader>sw", LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
+    { "<leader>sW", LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
+    { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }), desc = "Colorscheme with Preview" },
     {
       "<leader>ss",
       function()
         require("telescope.builtin").lsp_document_symbols({
-          -- symbols = require("lazyvim.config").get_kind_filter(),
-          show_line = true,
+          symbols = require("lazyvim.config").get_kind_filter(),
         })
       end,
       desc = "Goto Symbol",
@@ -95,8 +59,7 @@ return {
       "<leader>sS",
       function()
         require("telescope.builtin").lsp_dynamic_workspace_symbols({
-          -- symbols = require("lazyvim.config").get_kind_filter(),
-          show_line = true,
+          symbols = require("lazyvim.config").get_kind_filter(),
         })
       end,
       desc = "Goto Symbol (Workspace)",
@@ -107,21 +70,22 @@ return {
     local fb_actions = require("telescope._extensions.file_browser.actions")
     local actions = require("telescope.actions")
     local project_actions = require("telescope._extensions.project.actions")
-    local open_with_trouble = function(...)
-      return require("trouble.providers.telescope").open_with_trouble(...)
-    end
     local open_selected_with_trouble = function(...)
       return require("trouble.providers.telescope").open_selected_with_trouble(...)
+    end
+
+    local open_with_trouble = function(...)
+      return require("trouble.sources.telescope").open(...)
     end
     local find_files_no_ignore = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { no_ignore_parent = true, no_ignore = true, default_text = line })()
+      LazyVim.pick("find_files", { no_ignore = true, default_text = line })()
     end
     local find_files_with_hidden = function()
       local action_state = require("telescope.actions.state")
       local line = action_state.get_current_line()
-      LazyVim.telescope("find_files", { hidden = true, no_ignore = true, no_ignore_parent = true, default_text = line })()
+      LazyVim.pick("find_files", { hidden = true, default_text = line })()
     end
 
     return {
@@ -157,28 +121,11 @@ return {
             width = 0.8,
           },
         },
-        sorting_strategy = "ascending",
+        sorting_strategy = "descending",
         winblend = 0,
-        path_display = {
-          -- shorten = 4,
+        path_display = { -- shorten = 4,
           "filename_first",
         },
-        -- path_display = function(opts, path)
-        -- local tail = require("telescope.utils").path_tail(path)
-        -- path = string.format("%s (%s)", tail, path)
-
-        --   local highlights = {
-        --     {
-        --       {
-        --         0, -- highlight start position
-        --         #path, -- highlight end position
-        --       },
-        --       "Comment", -- highlight group name
-        --     },
-        --   }
-        --
-        --   return path, highlights
-        -- end,
         dynamic_preview_title = true,
       },
       wrap_results = true,
@@ -235,7 +182,10 @@ return {
         },
         project = {
           base_dirs = {
-            { "~/projects", max_depth = 4 },
+            {
+              "~/projects",
+              max_depth = 4,
+            },
           },
           exclude_dirs = { "~/.cargo/*", "node_modules/*" },
           patterns = { ".git", ".svn", "package.json" },
@@ -269,7 +219,10 @@ return {
             depth = 1,
             auto_depth = false,
             select_buffer = false,
-            hidden = { file_browser = false, folder_browser = false },
+            hidden = {
+              file_browser = false,
+              folder_browser = false,
+            },
             respect_gitignore = vim.fn.executable("fd") == 1,
             no_ignore = false,
             follow_symlinks = false,
@@ -281,7 +234,11 @@ return {
             quiet = false,
             dir_icon = "",
             dir_icon_hl = "Default",
-            display_stat = { date = true, size = true, mode = true },
+            display_stat = {
+              date = true,
+              size = true,
+              mode = true,
+            },
             hijack_netrw = false,
             use_fd = true,
             git_status = true,

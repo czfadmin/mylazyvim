@@ -40,6 +40,11 @@ end, {
   end,
 })
 
+map({ "n", "v", "s" }, "<C-\\>", "<cmd>vs<cr>", {
+  buffer = true,
+  noremap = true,
+  desc = "Split Window Right",
+})
 -- map({ "n", "v", "s" }, "?", "<cmd>:h<cr>", {
 --   silent = true,
 --   desc = "Help",

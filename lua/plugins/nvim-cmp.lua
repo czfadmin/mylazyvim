@@ -74,6 +74,7 @@ return {
         return kind
       end,
     }
+    table.insert(opts.sources, { name = "lazydev", group_index = 0 })
     table.insert(opts.sources, { name = "luasnip" })
   end,
 }
