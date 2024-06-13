@@ -8,14 +8,14 @@ return {
   "neovim/nvim-lspconfig",
   lazy = true,
   dependencies = {
-    "jose-elias-alvarez/typescript.nvim",
-    init = function()
-      require("lazyvim.util").lsp.on_attach(function(_, buffer)
-        -- stylua: ignore
-        vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-        vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-      end)
-    end,
+    -- "jose-elias-alvarez/typescript.nvim",
+    -- init = function()
+    --   require("lazyvim.util").lsp.on_attach(function(_, buffer)
+    --     -- stylua: ignore
+    --     vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+    --     vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+    --   end)
+    -- end,
   },
   opts = {
     inlay_hints = { enabled = true },
@@ -45,14 +45,31 @@ return {
     },
 
     servers = {
-      tsserver = {},
+      -- tsserver = {},
+      -- vtsls = {},
       dartls = {},
     },
     setup = {
-      tsserver = function(_, opts)
-        require("typescript").setup(opts)
-        return true
-      end,
+      -- tsserver = function(_, opts)
+      --   require("typescript").setup(opts)
+      --   return true
+      -- end,
+      -- vtsls = function(_, opts)
+      --   require("vtsls").setup({
+      --     servers = opts,
+      --     typescript = {
+      --       inlayHints = {
+      --         parameterNames = { enabled = "literals" },
+      --         parameterTypes = { enabled = true },
+      --         variableTypes = { enabled = true },
+      --         propertyDeclarationTypes = { enabled = true },
+      --         functionLikeReturnTypes = { enabled = true },
+      --         enumMemberValues = { enabled = true },
+      --       },
+      --     },
+      --   })
+      --   return true
+      -- end,
     },
   },
 }

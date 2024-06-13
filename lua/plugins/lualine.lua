@@ -8,6 +8,8 @@ return {
   event = "VeryLazy",
   opts = function(_, opts)
     local colors = {
+      inactive_fg = "#bbc2cf",
+      inactive_bg = "#20232a",
       bg = "#202328",
       fg = "#bbc2cf",
       yellow = "#ECBE7B",
@@ -60,6 +62,8 @@ return {
     -- Config
     local config = {
       options = {
+        icons_enabled = true,
+
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",
@@ -75,8 +79,8 @@ return {
           },
           inactive = {
             c = {
-              fg = colors.fg,
-              bg = colors.bg,
+              fg = colors.inactive_fg,
+              bg = colors.inactive_bg,
             },
           },
         },
@@ -216,7 +220,10 @@ return {
         return require("nvim-navic").get_location()
       end,
       cond = function()
-        return package.loaded["nvim-navic"] and require("nvim-navic").is_available() and conditions.hide_in_width
+        return package.loaded["nvim-navic"]
+          and require("nvim-navic").is_available()
+          and conditions.hide_in_width()
+          and conditions.buffer_not_empty()
       end,
       color = {
         gui = "bold",
@@ -328,7 +335,18 @@ return {
       },
     })
 
-    return config
+    -- vim.api.nvim_create_autocmd("BufAdd", {
+    --   callback = function()
+    --     vim.schedule(function()
+    --       local lualine = require("lualine")
+    --       if lualine ~= nil then
+    --         lualine.setup(opts)
+    --       end
+    --     end)
+    --   end,
+    -- })
+
+    return opts
   end,
   enable = true,
 }

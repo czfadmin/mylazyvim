@@ -20,6 +20,10 @@ return {
       click = true,
       lsp = {
         auto_attach = true,
+        -- preference = {
+        -- "vtsls",
+        -- "lua_ls",
+        -- },
       },
     }
   end,
@@ -33,7 +37,15 @@ return {
           end
         end)
       end,
-      opts = { lsp = { auto_attach = false } },
+      opts = {
+        lsp = {
+          auto_attach = false,
+          -- preference = {
+          -- "vtsls",
+          -- "lua_ls",
+          -- },
+        },
+      },
     },
   },
 }

@@ -34,7 +34,6 @@ opt.autowrite = true -- Enable auto write
 opt.autowriteall = true -- Enable auto write all
 
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
-
 opt.completeopt = "menu,menuone,noselect,noinsert"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
@@ -88,7 +87,7 @@ opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 2 -- Minimum window width
+opt.winminwidth = 4 -- Minimum window width
 opt.wrap = true
 
 if vim.fn.has("nvim-0.10") == 1 then

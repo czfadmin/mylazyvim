@@ -45,7 +45,7 @@ return {
       desc = "Toggle vertical terminal",
     },
     {
-      "<A-i>",
+      "<A-I>",
       mode = { "n", "v", "i", "s", "t" },
       function()
         require("nvterm.terminal").toggle("float")
