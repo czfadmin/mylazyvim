@@ -4,12 +4,12 @@ return {
   opts = {
     ensure_installed = {
       "stylua",
-      "shellcheck",
-      "shfmt",
-      "flake8",
-      "prettier",
-      "biome",
-      "codelldb",
+      -- "shellcheck",
+      -- "shfmt",
+      -- "flake8",
+      -- "prettier",
+      -- "biome",
+      -- "codelldb",
     },
   },
 }

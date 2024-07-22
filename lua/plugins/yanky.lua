@@ -41,8 +41,8 @@ return {
       "folke/which-key.nvim",
       optional = true,
       opts = {
-        defaults = {
-          ["<leader>p"] = { name = "+yank" },
+        specs = {
+          { "<leader>p", group = "yank" },
         },
       },
     },

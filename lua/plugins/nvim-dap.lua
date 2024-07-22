@@ -104,17 +104,6 @@ return {
         virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
         virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,},
       },
-
-      -- which key integration
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          defaults = {
-            ["<leader>d"] = { name = "+debug" },
-          },
-        },
-      },
     },
 
     keys = {

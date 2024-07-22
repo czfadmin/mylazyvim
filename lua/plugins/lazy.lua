@@ -47,8 +47,8 @@ return {
       "folke/which-key.nvim",
       optional = true,
       opts = {
-        defaults = {
-          ["<leader>l"] = { name = "+lazy" },
+        specs = {
+          { "<leader>l", group = "lazy" },
         },
       },
     },

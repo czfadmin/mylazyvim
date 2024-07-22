@@ -64,7 +64,7 @@ return {
       format = function(entry, vim_item)
         local kind = require("lspkind").cmp_format({
           mode = "symbol_text",
-          maxwidth = 80,
+          maxwidth = 120,
           show_labelDetails = true,
           ellipsis_char = "...",
         })(entry, vim_item)
