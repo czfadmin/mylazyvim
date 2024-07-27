@@ -17,7 +17,7 @@ return {
     dim_inactive = {
       enabled = true, -- dims the background color of inactive window
       shade = "dark",
-      percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      percentage = 0.5, -- percentage of the shade to apply to the inactive window
     },
     no_italic = false, -- Force no italic
     no_bold = false, -- Force no bold
@@ -41,10 +41,10 @@ return {
     custom_highlights = function(C)
       return {
         CmpItemMenu = { fg = C.mauve, bg = "NONE" },
-        CmpItemAbbrDeprecated = { fg = C.base, bg = "NONE", strikethrough = true },
+        CmpItemAbbrDeprecated = { fg = "#6e738d", bg = "NONE", strikethrough = true },
         CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
         CmpItemKindKeyword = { fg = C.base, bg = C.red },
-        CmpItemKindText = { fg = C.base, bg = C.teal },
+        CmpItemKindText = { fg = C.base, bg = C.peach },
         CmpItemKindMethod = { fg = C.base, bg = C.blue },
         CmpItemKindConstructor = { fg = C.base, bg = C.blue },
         CmpItemKindFunction = { fg = C.base, bg = C.blue },
@@ -69,7 +69,7 @@ return {
         CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
         CmpItemKindCopilot = { fg = C.base, bg = C.teal },
         Pmenu = { fg = "NONE", bg = "#20252e" },
-        PmenuSel = { bg = "#363a4e" },
+        PmenuSel = { bg = "#363a4e", bold = true },
         CmpItemAbbrMatch = { fg = C.mauve, bg = "NONE", bold = true },
         CmpItemAbbrMatchFuzzy = { fg = C.mauve, bg = "NONE", bold = true },
         CursorLine = { bg = "#363a52" },
@@ -124,6 +124,12 @@ return {
         warn = "  ",
         hint = "  ",
         info = "  ",
+      },
+      git = {
+        branch = "",
+        added = "",
+        changed = "",
+        removed = "",
       },
     },
     icons = {
