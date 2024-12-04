@@ -64,4 +64,5 @@ return {
       desc = "Open Lazy",
     },
   },
+  enabled = false,
 }

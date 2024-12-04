@@ -13,8 +13,8 @@ return {
     -- find
     { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
     { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-    { "<leader>fF", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
-    { "<leader>ff", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
+    { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+    { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
     { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
     { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
