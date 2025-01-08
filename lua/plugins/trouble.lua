@@ -3,7 +3,7 @@ return {
   keys = {},
   event = "LazyFile",
   opts = {
-    auto_close = false,
+    auto_close = true,
     restore = false,
     auto_refresh = true,
     modes = {

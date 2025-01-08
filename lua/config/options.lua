@@ -8,6 +8,10 @@ vim.g.maplocalleader = "\\"
 -- Enable LazyVim auto format
 vim.g.autoformat = true
 
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = true
+
 -- LazyVim root dir detection
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
@@ -21,6 +25,28 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 --  * enables nerd font icons
 -- Set to false to disable.
 vim.g.lazygit_config = true
+
+-- Folding
+vim.opt.foldlevel = 99
+
+-- LazyVim picker to use.
+-- Can be one of: telescope, fzf
+-- Leave it to "auto" to automatically use the picker
+-- enabled with `:LazyExtras`
+vim.g.lazyvim_picker = "fzf"
+
+-- LazyVim completion engine to use.
+-- Can be one of: nvim-cmp, blink.cmp
+-- Leave it to "auto" to automatically use the completion engine
+-- enabled with `:LazyExtras`
+vim.g.lazyvim_cmp = "auto"
+
+-- Hide deprecation warnings
+vim.g.deprecation_warnings = false
+
+-- Show the current document symbols location from Trouble in lualine
+-- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
+vim.g.trouble_lualine = true
 
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
@@ -78,7 +104,7 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
+opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
@@ -90,8 +116,6 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
 opt.showtabline = 2 -- 总是显示tabline
--- Folding
-vim.opt.foldlevel = 99
 -- change the default shell
 
 if vim.fn.executable("pwsh") == 1 then

@@ -72,5 +72,5 @@ return {
     })
   end,
   main = "ibl",
-  enabled = true,
+  enabled = false,
 }

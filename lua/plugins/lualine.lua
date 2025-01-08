@@ -206,7 +206,7 @@ return {
       cond = function()
         return package.loaded["dap"] and require("dap").status() ~= ""
       end,
-      color = LazyVim.ui.fg("Debug"),
+      -- color = colors.red,
     })
 
     ins_left({

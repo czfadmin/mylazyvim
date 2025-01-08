@@ -279,7 +279,7 @@ return {
           },
         },
       },
-      extensions_list = { "fzf", "emoji", "project", "file_browser", "media_files" },
+      extensions_list = { "emoji", "project", "file_browser", "media_files" },
     }
   end,
   config = function(_, opts)
@@ -291,4 +291,5 @@ return {
       telescope.load_extension(ext)
     end
   end,
+  enabled = true,
 }

@@ -6,4 +6,5 @@ return {
   keys = {
     { "<leader>tfb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File browser" },
   },
+  enabled = true,
 }
