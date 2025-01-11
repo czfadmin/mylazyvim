@@ -10,7 +10,7 @@ vim.g.autoformat = true
 
 -- Snacks animations
 -- Set to `false` to globally disable all snacks animations
-vim.g.snacks_animate = true
+vim.g.snacks_animate = false
 
 -- LazyVim root dir detection
 -- Each entry can be:
@@ -39,7 +39,7 @@ vim.g.lazyvim_picker = "fzf"
 -- Can be one of: nvim-cmp, blink.cmp
 -- Leave it to "auto" to automatically use the completion engine
 -- enabled with `:LazyExtras`
-vim.g.lazyvim_cmp = "auto"
+vim.g.lazyvim_cmp = "nvim-cmp"
 
 -- Hide deprecation warnings
 vim.g.deprecation_warnings = false
