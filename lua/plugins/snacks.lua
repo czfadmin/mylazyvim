@@ -34,6 +34,8 @@ return {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+
+    scroll = { enabled = false },
   },
   enabled = true,
 }
