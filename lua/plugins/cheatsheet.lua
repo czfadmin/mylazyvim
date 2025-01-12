@@ -11,7 +11,7 @@ return {
     require("cheatsheet").setup({
       bundled_cheetsheets = {
         enabled = { "default", "lua", "markdown", "regex", "netrw", "unicode" },
-        disabled = { "nerd-fonts" },
+        -- disabled = { "nerd-fonts" },
       },
       bundled_plugin_cheatsheets = {
         enabled = {
@@ -22,7 +22,7 @@ return {
           "vim-easy-align",
           "vim-sandwich",
         },
-        disabled = { "gitsigns" },
+        -- disabled = { "gitsigns" },
       },
       include_only_installed_plugins = true,
       telescope_mappings = {
@@ -33,5 +33,5 @@ return {
       },
     })
   end,
-  enabled = false,
+  enabled = true,
 }

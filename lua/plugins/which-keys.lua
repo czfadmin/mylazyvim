@@ -5,5 +5,7 @@ return {
     spec = {
       { "<leader>d", group = "debug" },
     },
+    -- preset = "modern",
+    preset = "helix",
   },
 }
