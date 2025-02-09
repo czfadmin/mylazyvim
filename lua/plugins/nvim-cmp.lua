@@ -82,5 +82,5 @@ return {
     }
   end,
   main = "lazyvim.util.cmp",
-  enabled = true,
+  enabled = false,
 }

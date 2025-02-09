@@ -39,7 +39,7 @@ vim.g.lazyvim_picker = "fzf"
 -- Can be one of: nvim-cmp, blink.cmp
 -- Leave it to "auto" to automatically use the completion engine
 -- enabled with `:LazyExtras`
-vim.g.lazyvim_cmp = "nvim-cmp"
+vim.g.lazyvim_cmp = "blink.cmp"
 
 -- Hide deprecation warnings
 vim.g.deprecation_warnings = false
