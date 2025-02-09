@@ -296,7 +296,7 @@ return {
 
     keymap = {
       -- set to 'none' to disable the 'default' preset
-      preset = "default",
+      preset = "enter",
       -- optionally, separate cmdline keymaps
       -- cmdline = {}
     },
