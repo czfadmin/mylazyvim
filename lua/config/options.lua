@@ -48,10 +48,11 @@ vim.g.deprecation_warnings = false
 -- You can disable this for a buffer by setting `vim.b.trouble_lualine = false`
 vim.g.trouble_lualine = true
 
--- Optionally setup the terminal to use
--- This sets `vim.o.shell` and does some additional configuration for:
--- * pwsh
--- * powershell
+-- LSP Server to use for Rust.
+-- Set to "bacon-ls" to use bacon-ls instead of rust-analyzer.
+-- only for diagnostics. The rest of LSP support will still be
+-- provided by rust-analyzer.
+-- vim.g.lazyvim_rust_diagnostics = "bacon-ls"
 
 local opt = vim.opt
 
@@ -116,7 +117,12 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
 opt.showtabline = 2 -- 总是显示tabline
+
 -- change the default shell
+-- Optionally setup the terminal to use
+-- This sets `vim.o.shell` and does some additional configuration for:
+-- * pwsh
+-- * powershell
 
 if vim.fn.executable("pwsh") == 1 then
   vim.go.shell = "pwsh"
