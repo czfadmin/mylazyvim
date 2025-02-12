@@ -17,14 +17,14 @@ return {
           source = "filesystem", -- string
           display_name = " 󰉓 Files ", -- string | nil
         },
-        {
-          source = "buffers", -- string
-          display_name = " 󰈚 Buffers ", -- string | nil
-        },
-        {
-          source = "git_status", -- string
-          display_name = " 󰊢 Git ", -- string | nil
-        },
+        -- {
+        --   source = "buffers", -- string
+        --   display_name = " 󰈚 Buffers ", -- string | nil
+        -- },
+        -- {
+        --   source = "git_status", -- string
+        --   display_name = " 󰊢 Git ", -- string | nil
+        -- },
       },
       content_layout = "start", -- string
       tabs_layout = "equal", -- string
@@ -205,4 +205,5 @@ return {
   config = function(_, opts)
     require("neo-tree").setup(opts)
   end,
+  enabled = true,
 }

@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope-project.nvim",
   event = "VeryLazy",
-  enabled = true,
+  enabled = false,
   keys = {
     {
       "<leader>pc",

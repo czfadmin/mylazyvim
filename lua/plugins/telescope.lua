@@ -291,5 +291,5 @@ return {
       telescope.load_extension(ext)
     end
   end,
-  enabled = true,
+  enabled = false,
 }

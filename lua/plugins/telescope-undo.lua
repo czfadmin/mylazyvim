@@ -10,7 +10,7 @@ return {
   },
   keys = {
     { -- lazy style key map
-      "<leader>u",
+      "<leader>suh",
       "<cmd>Telescope undo<cr>",
       desc = "undo history",
     },
@@ -31,5 +31,5 @@ return {
     require("telescope").setup(opts)
     require("telescope").load_extension("undo")
   end,
-  enabled = true,
+  enabled = false,
 }

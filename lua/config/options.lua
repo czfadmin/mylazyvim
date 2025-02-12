@@ -118,7 +118,18 @@ opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
 opt.showtabline = 2 -- 总是显示tabline
 
+if vim.fn.has("nvim-0.10") == 1 then
+  opt.smoothscroll = true
+  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  opt.foldmethod = "expr"
+  opt.foldtext = ""
+else
+  opt.foldmethod = "indent"
+  opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+end
+
 -- change the default shell
+--
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
@@ -142,3 +153,6 @@ end
 --   },
 --   cache_enabled = 1000,
 -- }
+--
+vim.g.markdown_recommended_style = 0
+-- vim.g.snacks_anima
