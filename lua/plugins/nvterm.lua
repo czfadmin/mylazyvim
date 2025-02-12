@@ -150,4 +150,5 @@ return {
   config = function(_, opts)
     require("nvterm").setup(opts)
   end,
+  enabled = false,
 }

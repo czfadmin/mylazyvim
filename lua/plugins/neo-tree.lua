@@ -1,5 +1,8 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  priority = 100,
+  lazy = false,
+  enabled = true,
   opts = {
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = "rounded",
@@ -205,5 +208,4 @@ return {
   config = function(_, opts)
     require("neo-tree").setup(opts)
   end,
-  enabled = true,
 }

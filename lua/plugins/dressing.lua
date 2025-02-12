@@ -21,5 +21,5 @@ return {
       winhighlight = "NormalFloat:DiagnosticError",
     },
   },
-  enabled = false,
+  enabled = true,
 }

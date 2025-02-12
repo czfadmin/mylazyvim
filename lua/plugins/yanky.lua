@@ -14,7 +14,11 @@ return {
     {
       "<leader>pp",
       function()
-        require("telescope").extensions.yank_history.yank_history({})
+        if LazyVim.pick.picker.name == "telescope" then
+          require("telescope").extensions.yank_history.yank_history({})
+        else
+          vim.cmd([[YankyRingHistory]])
+        end
       end,
       desc = "Open Yank History",
     },
@@ -42,7 +46,7 @@ return {
       optional = true,
       opts = {
         specs = {
-          { "<leader>p", group = "yank" },
+          { "<leader>y", group = "yanky" },
         },
       },
     },
