@@ -7,7 +7,7 @@ local map = vim.keymap.set
 
 -- open lazy
 
-map("n", "<leader>sur", ":luafile %", {
+map("n", "<leader>sur", "<cmd>luafile %<cr>", {
   silent = true,
   desc = "luafile %",
   noremap = true,
@@ -17,17 +17,18 @@ map({ "n", "v", "s" }, "<C-A>", "<cmd>:normal gg<cr>vG<cr>", {
   desc = "Select all",
 })
 
-map({ "n", "v", "s" }, "<leader>sut", ":Telescope<cr>", {
-  silent = true,
-  desc = "Telescope",
-  noremap = true,
-})
+-- map({ "n", "v", "s" }, "<leader>sut", ":Telescope<cr>", {
+--   silent = true,
+--   desc = "Telescope",
+--   noremap = true,
+-- })
 
-map({ "n", "v", "s" }, "<leader>suc", ":Cheatsheet<cr>", {
-  silent = true,
-  desc = "Cheatsheet",
-  noremap = true,
-})
+-- map({ "n", "v", "s" }, "<leader>suc", ":Cheatsheet<cr>", {
+--   silent = true,
+--   desc = "Cheatsheet",
+--   noremap = true,
+-- })
+--
 
 map({ "n", "v", "s" }, "<leader>sf", function()
   vim.cmd("wa")
@@ -40,12 +41,23 @@ end, {
   end,
 })
 
-map({ "n", "v", "s" }, "<C-\\>", "<cmd>vs<cr>", {
-  buffer = true,
-  noremap = true,
-  desc = "Split Window Right",
-})
--- map({ "n", "v", "s" }, "?", "<cmd>:h<cr>", {
---   silent = true,
---   desc = "Help",
+-- map("n", "<c-\\>", "<cmd>vs<cr>", {
+--   buffer = true,
+--   noremap = true,
+--   desc = "Split Window Right",
 -- })
+--
+-- map(
+--   {
+--     "n",
+--     "v",
+--     "s",
+--   },
+--   "<leader>sv",
+--   "<cmd>sp<cr>",
+--   {
+--     buffer = true,
+--     noremap = true,
+--     desc = "Split Window Below",
+--   }
+-- )

@@ -49,13 +49,13 @@ return {
         max_items = 200,
         selection = {
           -- When `true`, will automatically select the first item in the completion list
-          preselect = true,
+          preselect = false,
           -- preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
 
           -- When `true`, inserts the completion item automatically when selecting it
           -- You may want to bind a key to the `cancel` command (default <C-e>) when using this option,
           -- which will both undo the selection and hide the completion menu
-          auto_insert = true,
+          auto_insert = false,
           -- auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
         },
 
@@ -202,7 +202,7 @@ return {
       ghost_text = {
         enabled = vim.g.ai_cmp,
         -- Show the ghost text when an item has been selected
-        show_with_selection = true,
+        show_with_selection = false,
         -- Show the ghost text when no item has been selected, defaulting to the first item
         show_without_selection = false,
       },
@@ -237,11 +237,11 @@ return {
 
         -- When both this and show_on_trigger_character are true, will show the completion window
         -- when the cursor comes after a trigger character after accepting an item
-        show_on_accept_on_trigger_character = true,
+        show_on_accept_on_trigger_character = false,
 
         -- When both this and show_on_trigger_character are true, will show the completion window
         -- when the cursor comes after a trigger character when entering insert mode
-        show_on_insert_on_trigger_character = true,
+        show_on_insert_on_trigger_character = false,
 
         -- List of trigger characters (on top of `show_on_blocked_trigger_characters`) that won't trigger
         -- the completion window when the cursor comes after a trigger character when
@@ -266,7 +266,7 @@ return {
         -- Show the signature help window when entering insert mode
         show_on_insert = false,
         -- Show the signature help window when the cursor comes after a trigger character when entering insert mode
-        show_on_insert_on_trigger_character = true,
+        show_on_insert_on_trigger_character = false,
       },
       window = {
         min_width = 1,

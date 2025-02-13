@@ -1,7 +1,7 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
   priority = 100,
-  lazy = false,
+  lazy = true,
   enabled = true,
   opts = {
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab

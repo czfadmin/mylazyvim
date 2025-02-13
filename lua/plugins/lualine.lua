@@ -332,12 +332,46 @@ return {
 
     ins_right({
       function()
+        return ""
+        -- return " " .. (100 * (1 - vim.uv.get_available_memory() / vim.uv.get_total_memory())) .. "%"
+      end,
+      color = {
+        fg = function()
+          local value = vim.uv.get_available_memory() * 100 / vim.uv.get_total_memory()
+          if value >= 80 then
+            return colors.green
+          elseif value >= 7 then
+            return colors.blue
+          elseif value >= 65 then
+            return colors.yellow
+          elseif value >= 40 then
+            return colors.orange
+          elseif value >= 30 then
+            return colors.red
+          end
+          return colors.green
+        end,
+      },
+    })
+
+    -- ins_right({
+    --   function()
+    --     return "" .. vim.uv:getrusage()
+    --   end,
+    --   color = {
+    --     fg = function() end,
+    --   },
+    -- })
+    --
+    ins_right({
+      function()
         return " " .. os.date("%R")
       end,
       color = {
         fg = colors.red,
       },
     })
+
     ins_right({
       function()
         return "▊"

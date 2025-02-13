@@ -15,27 +15,26 @@ return {
         { section = "keys", gap = 1, padding = 1 },
         { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-        -- {
-        --   pane = 2,
-        --   icon = " ",
-        --   title = "Git Status",
-        --   section = "terminal",
-        --   enabled = function()
-        --     return Snacks.git.get_root() ~= nil
-        --   end,
-        --   cmd = "git status --short --branch --renames",
-        --   height = 5,
-        --   padding = 1,
-        --   ttl = 5 * 60,
-        --   indent = 3,
-        -- },
+        {
+          pane = 2,
+          icon = " ",
+          title = "Git Status",
+          section = "terminal",
+          enabled = function()
+            return Snacks.git.get_root() ~= nil
+          end,
+          cmd = "git status --short --branch --renames",
+          height = 5,
+          padding = 1,
+          ttl = 5 * 60,
+          indent = 3,
+        },
         { section = "startup" },
       },
     },
     dim = { enabled = true },
-    --
     bigfile = { enabled = true },
-    notifier = { enabled = true },
+    notifier = { enabled = true, style = "compact" },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     scope = { enabled = true },
@@ -51,7 +50,6 @@ return {
     ---@class snacks.indent.Config
     indent = {
       enabled = true,
-
       indent = {
         priority = 200,
         char = "╎",
@@ -155,12 +153,24 @@ return {
       },
     },
     terminal = {
-      enabled = true,
+      enabled = false,
     },
     win = {
       enabled = true,
     },
     styles = {
+      {
+        border = "rounded",
+        zindex = 100,
+        ft = "markdown",
+        wo = {
+          winblend = 0,
+          wrap = false,
+          conceallevel = 2,
+          colorcolumn = "",
+        },
+        bo = { filetype = "snacks_notif" },
+      },
       notification_history = {
         border = "rounded",
         zindex = 100,
@@ -267,25 +277,19 @@ return {
       end,
       desc = "Dismiss All Notifications",
     },
-    {
-      "<c-/>",
-      function()
-        Snacks.terminal()
-      end,
-      desc = "Toggle Terminal",
-    },
-    {
-      "<c-_>",
-      function()
-        -- Snacks.terminal("", {
-        --   win = {
-        --     position = "float",
-        --     show = true,
-        --   },
-        -- )
-      end,
-      desc = "Toggle Float terminal",
-    },
+
+    -- {
+    --   "<c-_>",
+    --   function()
+    --     Snacks.terminal("", {
+    --       win = {
+    --         position = "float",
+    --         show = true,
+    --       },
+    --     })
+    --   end,
+    --   desc = "Toggle Float terminal",
+    -- },
     {
       "]]",
       function()

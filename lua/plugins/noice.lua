@@ -58,8 +58,8 @@ return {
           },
           cmdline_popupmenu = {
             position = {
-              row = "67%",
-              col = "50%",
+              row = "8%",
+              col = "45%",
             },
           },
         },
