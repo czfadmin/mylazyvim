@@ -323,7 +323,7 @@ return {
         if timer and timer:is_active() ~= true then
           freeUseage = vim.uv.get_available_memory() / vim.uv.get_total_memory()
           memoryUseage = string.format("  %.1f%%%%", 100 * (1 - freeUseage))
-          timer:start(2000, 0, function()
+          timer:start(3000, 0, function()
             timer:stop()
           end)
         end
@@ -398,7 +398,7 @@ return {
         if cpu_timer and not cpu_timer:is_active() then
           local total1, idle1 = get_cpu_info()
           cpu_timer:start(
-            3000,
+            0,
             3000,
             vim.schedule_wrap(function()
               local total2, idle2 = get_cpu_info()

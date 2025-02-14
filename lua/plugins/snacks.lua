@@ -117,20 +117,20 @@ return {
       end,
     },
     --
-    -- image = {
-    --   enabled = true,
-    --   --       force = false, -- try displaying the image, even if the terminal does not support it
-    --   -- wo = {
-    --   --   wrap = false,
-    --   --   number = false,
-    --   --   relativenumber = false,
-    --   --   cursorcolumn = false,
-    --   --   signcolumn = "no",
-    --   --   foldcolumn = "0",
-    --   --   list = false,
-    --   --   spell = false,
-    --   --   statuscolumn = "",
-    -- },
+    image = {
+      enabled = true,
+      --       force = false, -- try displaying the image, even if the terminal does not support it
+      -- wo = {
+      --   wrap = false,
+      --   number = false,
+      --   relativenumber = false,
+      --   cursorcolumn = false,
+      --   signcolumn = "no",
+      --   foldcolumn = "0",
+      --   list = false,
+      --   spell = false,
+      --   statuscolumn = "",
+    },
     scroll = { enabled = false },
     gitbrowse = {
       enabled = true,
@@ -143,12 +143,27 @@ return {
       enabled = false,
     },
     picker = {
-      enabled = false,
+      enabled = true,
       sources = {
         explorer = {
           -- your explorer picker configuration comes here
           -- or leave it empty to use the default settings
           enabled = false,
+        },
+      },
+      actions = {
+        trouble_open = function(...)
+          return require("trouble.sources.snacks").actions.trouble_open.action(...)
+        end,
+      },
+      win = {
+        input = {
+          keys = {
+            ["<c-t>"] = {
+              "trouble_open",
+              mode = { "n", "i" },
+            },
+          },
         },
       },
     },
@@ -344,6 +359,130 @@ return {
         Snacks.zen.zoom()
       end,
       desc = "Toggle Zoom",
+    },
+    {
+      "<leader>sp",
+      function()
+        Snacks.picker.projects()
+      end,
+      mode = { "n" },
+      desc = "Select Project (Snacks)",
+    },
+    {
+      "<leader>suu",
+      function()
+        Snacks.picker.undo()
+      end,
+      mode = { "n" },
+      desc = "Undotree (Snacks)",
+    },
+    {
+      "<leader>sui",
+      function()
+        Snacks.picker.icons()
+      end,
+      mode = { "n" },
+      desc = "Icons (Snacks)",
+    },
+    {
+      "<leader>suk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      mode = { "n" },
+      desc = "Keymaps (Snacks)",
+    },
+    {
+      '<leader>sus"',
+      function()
+        Snacks.picker.registers()
+      end,
+      desc = "Registers (Snacks)",
+    },
+    {
+      "<leader>suC",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>suM",
+      function()
+        Snacks.picker.man()
+      end,
+      desc = "Man Pages (Snacks)",
+    },
+
+    {
+      "<leader>sum",
+      function()
+        Snacks.picker.marks()
+      end,
+      desc = "Marks (Snacks)",
+    },
+    {
+      "<leader>suj",
+      function()
+        Snacks.picker.jumps()
+      end,
+      desc = "Jumps (Snacks)",
+    },
+    {
+      "<leader>sugc",
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = "Git Log (Snacks)",
+    },
+    {
+      "<leader>suc",
+      function()
+        Snacks.picker.commands()
+      end,
+      desc = "Commands (Snacks)",
+    },
+    {
+      "<leader>sud",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Diagnostics (Snacks)",
+    },
+    {
+      "<leader>suD",
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      desc = "Buffer Diagnostics (Snacks)",
+    },
+    {
+      "<leader>suR",
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = "Resume (Snacks)",
+    },
+    {
+      "<leader>sugd",
+      function()
+        Snacks.picker.git_diff()
+      end,
+      desc = "Git Diff (hunks - Snacks)",
+    },
+    {
+      "<leader>sugs",
+      function()
+        Snacks.picker.git_status()
+      end,
+      desc = "Git Status (Snacks)",
+    },
+    {
+      "<leader>sugS",
+      function()
+        Snacks.picker.git_stash()
+      end,
+      desc = "Git Stash (Snacks)",
     },
   },
   enabled = true,

@@ -80,7 +80,20 @@ return {
       window = {
         mappings = {
           ["<F5>"] = "refresh",
-          ["P"] = "preview",
+          ["P"] = "toggle_preview",
+          -- ["e"] = function()
+          --   vim.api.nvim_exec2("Neotree focus filesystem left", {
+          --     output = false,
+          --   })
+          -- end,
+          -- ["b"] = function()
+          --   vim.api.nvim_exec2("Neotree focus buffers left", { output = false })
+          -- end,
+          -- ["g"] = function()
+          --   vim.api.nvim_exec2("Neotree focus git_status left", {
+          --     output = false,
+          --   })
+          -- end,
         },
       },
     },
@@ -170,7 +183,10 @@ return {
     event_handers = {
       {
         event = "file_added",
-        handler = function(args) end,
+        handler = function(args)
+          print(vim.inspect(args))
+          vim.cmd("edit! " .. args.source)
+        end,
         id = "created_file_and_open_it_later",
       },
       {
@@ -180,6 +196,37 @@ return {
           vim.keymap.set("i", "<esc>", vim.cmd.stopinsert, { noremap = true, buffer = args.bufnr })
         end,
       },
+      -- {
+      --   event = "neo_tree_buffer_enter",
+      --   handler = function()
+      --     vim.cmd("highlight! Cursor blend=100")
+      --   end,
+      -- },
+      -- {
+      --   event = "neo_tree_buffer_leave",
+      --   handler = function()
+      --     vim.cmd("highlight! Cursor guibg=#5f87af blend=0")
+      --   end,
+      -- },
+      -- {
+      --   event = "after_render",
+      --   handler = function(state)
+      --     if state.current_position == "left" or state.current_position == "right" then
+      --       vim.api.nvim_win_call(state.winid, function()
+      --         local str = require("neo-tree.ui.selector").get()
+      --         if str then
+      --           _G.__cached_neo_tree_selector = str
+      --         end
+      --       end)
+      --     end
+      --   end,
+      -- },
+      -- {
+      --   event = "file_opened",
+      --   handler = function(file_path)
+      --     require("neo-tree.sources.filesystem").reset_search(state)
+      --   end,
+      -- },
     },
   },
   keys = {
@@ -191,6 +238,7 @@ return {
           dir = (vim.uv or vim.loop).cwd(),
         })
       end,
+      mode = { "t", "n", "v" },
       desc = "Toggle Explorer",
     },
     {
