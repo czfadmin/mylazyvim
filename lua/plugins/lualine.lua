@@ -218,22 +218,6 @@ return {
       },
     })
 
-    -- ins_left({
-    --   function()
-    --     return require("nvim-navic").get_location()
-    --   end,
-    --   cond = function()
-    --     return package.loaded["nvim-navic"]
-    --       and require("nvim-navic").is_available()
-    --       and conditions.hide_in_width()
-    --       and conditions.buffer_not_empty()
-    --   end,
-    --   color = {
-    --     gui = "bold",
-    --     bg = colors.bg,
-    --   },
-    -- })
-    --
     local trouble = require("trouble")
     local symbols = trouble.statusline({
       mode = "lsp_document_symbols",
@@ -330,39 +314,126 @@ return {
       cond = conditions.hide_in_width,
     })
 
+    local timer = (vim.uv or vim.loop).new_timer()
+    local freeUseage
+
+    local memoryUseage
     ins_right({
       function()
-        return ""
-        -- return " " .. (100 * (1 - vim.uv.get_available_memory() / vim.uv.get_total_memory())) .. "%"
+        if timer and timer:is_active() ~= true then
+          freeUseage = vim.uv.get_available_memory() / vim.uv.get_total_memory()
+          memoryUseage = string.format("  %.1f%%%%", 100 * (1 - freeUseage))
+          timer:start(2000, 0, function()
+            timer:stop()
+          end)
+        end
+        return memoryUseage
       end,
-      color = {
-        fg = function()
-          local value = vim.uv.get_available_memory() * 100 / vim.uv.get_total_memory()
-          if value >= 80 then
-            return colors.green
-          elseif value >= 7 then
-            return colors.blue
-          elseif value >= 65 then
-            return colors.yellow
-          elseif value >= 40 then
-            return colors.orange
-          elseif value >= 30 then
-            return colors.red
-          end
-          return colors.green
-        end,
-      },
+      color = function()
+        local fg = ""
+        local value = 100 * (freeUseage or 0)
+        if value >= 85 then
+          fg = colors.green
+        elseif value >= 70 then
+          fg = colors.blue
+        elseif value >= 65 then
+          fg = colors.yellow
+        elseif value >= 40 then
+          fg = colors.orange
+        elseif value >= 30 then
+          fg = colors.red
+        end
+
+        return {
+          fg = fg,
+        }
+      end,
     })
 
-    -- ins_right({
-    --   function()
-    --     return "" .. vim.uv:getrusage()
-    --   end,
-    --   color = {
-    --     fg = function() end,
-    --   },
-    -- })
+    local cpu_useage
+    local cpu_timer = (vim.uv or vim.loop).new_timer()
+
+    -- local readCpuInfo = function()
+    --   local file = io.open("/proc/stat", "r") -- 打开 /proc/stat 文件
+    --   if not file then
+    --     cpu_useage = 0
+    --     return 0, 0
+    --   else
+    --     local line = file:read("*line")
+    --     local user, nice, system, idle, iowait, irq, softirq, steal =
+    --       line:match("cpu%s+(%d+) (%d+) (%d+) (%d+) (%d+) (%d+) (%d+) (%d+)")
     --
+    --     -- 将字符串转换为数字
+    --     user, nice, system, idle, irq, softirq, iowait, steal =
+    --       tonumber(user),
+    --       tonumber(nice),
+    --       tonumber(system),
+    --       tonumber(idle),
+    --       tonumber(irq),
+    --       tonumber(softirq),
+    --       tonumber(iowait),
+    --       tonumber(steal)
+    --
+    --     -- 计算 CPU 使用率
+    --     local total = user + nice + system + idle + irq + softirq + iowait + steal
+    --     return total, idle
+    --   end
+    -- end
+
+    local get_cpu_info = function()
+      local cpu_info = vim.uv.cpu_info()
+      local total = 0
+      local idle = 0
+      if cpu_info ~= nil then
+        for _, item in ipairs(cpu_info) do
+          total = total + item.times.user + item.times.nice + item.times.idle + item.times.sys + item.times.irq
+          idle = idle + item.times.idle
+        end
+      end
+      return total, idle
+    end
+
+    ins_right({
+      function()
+        if cpu_timer and not cpu_timer:is_active() then
+          local total1, idle1 = get_cpu_info()
+          cpu_timer:start(
+            3000,
+            3000,
+            vim.schedule_wrap(function()
+              local total2, idle2 = get_cpu_info()
+              local total = total2 - total1
+              local _idle_time = idle2 - idle1
+              if total ~= 0 then
+                cpu_useage = (total - _idle_time) / total
+              end
+            end)
+          )
+        end
+
+        return string.format("CPU: %.2f%%%%", cpu_useage * 100)
+      end,
+      color = function()
+        local fg = ""
+        local _cpu_useage = cpu_useage or 0
+        if _cpu_useage >= 90 then
+          fg = colors.red
+        elseif _cpu_useage >= 75 then
+          fg = colors.orange
+        elseif _cpu_useage >= 55 then
+          fg = colors.yellow
+        elseif _cpu_useage >= 40 then
+          fg = colors.blue
+        else
+          fg = colors.green
+        end
+
+        return {
+          fg = fg,
+        }
+      end,
+    })
+
     ins_right({
       function()
         return " " .. os.date("%R")
