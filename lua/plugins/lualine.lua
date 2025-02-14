@@ -350,8 +350,8 @@ return {
       end,
     })
 
-    local cpu_useage
-    local cpu_timer = (vim.uv or vim.loop).new_timer()
+    -- local cpu_useage
+    -- local cpu_timer = (vim.uv or vim.loop).new_timer()
 
     -- local readCpuInfo = function()
     --   local file = io.open("/proc/stat", "r") -- 打开 /proc/stat 文件
@@ -379,60 +379,60 @@ return {
     --     return total, idle
     --   end
     -- end
+    --
+    -- local get_cpu_info = function()
+    --   local cpu_info = vim.uv.cpu_info()
+    --   local total = 0
+    --   local idle = 0
+    --   if cpu_info ~= nil then
+    --     for _, item in ipairs(cpu_info) do
+    --       total = total + item.times.user + item.times.nice + item.times.idle + item.times.sys + item.times.irq
+    --       idle = idle + item.times.idle
+    --     end
+    --   end
+    --   return total, idle
+    -- end
 
-    local get_cpu_info = function()
-      local cpu_info = vim.uv.cpu_info()
-      local total = 0
-      local idle = 0
-      if cpu_info ~= nil then
-        for _, item in ipairs(cpu_info) do
-          total = total + item.times.user + item.times.nice + item.times.idle + item.times.sys + item.times.irq
-          idle = idle + item.times.idle
-        end
-      end
-      return total, idle
-    end
-
-    ins_right({
-      function()
-        if cpu_timer and not cpu_timer:is_active() then
-          local total1, idle1 = get_cpu_info()
-          cpu_timer:start(
-            0,
-            3000,
-            vim.schedule_wrap(function()
-              local total2, idle2 = get_cpu_info()
-              local total = total2 - total1
-              local _idle_time = idle2 - idle1
-              if total ~= 0 then
-                cpu_useage = (total - _idle_time) / total
-              end
-            end)
-          )
-        end
-
-        return string.format("CPU: %.2f%%%%", cpu_useage * 100)
-      end,
-      color = function()
-        local fg = ""
-        local _cpu_useage = cpu_useage or 0
-        if _cpu_useage >= 90 then
-          fg = colors.red
-        elseif _cpu_useage >= 75 then
-          fg = colors.orange
-        elseif _cpu_useage >= 55 then
-          fg = colors.yellow
-        elseif _cpu_useage >= 40 then
-          fg = colors.blue
-        else
-          fg = colors.green
-        end
-
-        return {
-          fg = fg,
-        }
-      end,
-    })
+    -- ins_right({
+    --   function()
+    --     if cpu_timer and not cpu_timer:is_active() then
+    --       local total1, idle1 = get_cpu_info()
+    --       cpu_timer:start(
+    --         0,
+    --         3000,
+    --         vim.schedule_wrap(function()
+    --           local total2, idle2 = get_cpu_info()
+    --           local total = total2 - total1
+    --           local _idle_time = idle2 - idle1
+    --           if total ~= 0 then
+    --             cpu_useage = (total - _idle_time) / total
+    --           end
+    --         end)
+    --       )
+    --     end
+    --
+    --     return string.format("CPU: %.2f%%%%", cpu_useage * 100)
+    --   end,
+    --   color = function()
+    --     local fg = ""
+    --     local _cpu_useage = cpu_useage or 0
+    --     if _cpu_useage >= 90 then
+    --       fg = colors.red
+    --     elseif _cpu_useage >= 75 then
+    --       fg = colors.orange
+    --     elseif _cpu_useage >= 55 then
+    --       fg = colors.yellow
+    --     elseif _cpu_useage >= 40 then
+    --       fg = colors.blue
+    --     else
+    --       fg = colors.green
+    --     end
+    --
+    --     return {
+    --       fg = fg,
+    --     }
+    --   end,
+    -- })
 
     ins_right({
       function()
