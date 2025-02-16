@@ -82,4 +82,5 @@ return {
       desc = "Toggle Flash Search",
     },
   },
+  enabled = true,
 }

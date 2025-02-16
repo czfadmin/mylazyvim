@@ -243,7 +243,15 @@ return {
           LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}
         ),
         handlers = { setup },
+        automatic_installation = false,
       })
+    end
+
+    if LazyVim.lsp.is_enabled("ts_ls") and LazyVim.lsp.is_enabled("vtsls") then
+      LazyVim.lsp.disable("ts_ls", function(_, config)
+        config.settings.ts_ls.enable = false
+        return false
+      end)
     end
 
     if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then
