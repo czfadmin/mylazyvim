@@ -291,9 +291,11 @@ return {
       -- with blink.compat
       compat = {},
       default = { "lsp", "path", "snippets", "buffer" },
-      cmdline = {},
     },
 
+    cmdline = {
+      sources = {},
+    },
     keymap = {
       -- set to 'none' to disable the 'default' preset
       preset = "enter",
