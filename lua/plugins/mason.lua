@@ -8,6 +8,10 @@ return {
     ensure_installed = {
       "stylua",
       "shfmt",
+      "prettier",
+      "biome",
+      "ruff",
+      "debugpy",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}
