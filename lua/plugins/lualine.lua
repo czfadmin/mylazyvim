@@ -314,24 +314,27 @@ return {
       cond = conditions.hide_in_width,
     })
 
-    local timer = (vim.uv or vim.loop).new_timer()
-    local freeUseage
+    local memory_read_timer = (vim.uv or vim.loop).new_timer()
+    local free_useage
 
-    local memoryUseage
+    local memory_useage = ""
+    if memory_read_timer then
+      memory_read_timer:start(
+        1000,
+        3000,
+        vim.schedule_wrap(function()
+          free_useage = vim.uv.get_available_memory() / vim.uv.get_total_memory()
+          memory_useage = string.format("  %.1f%%%%", 100 * (1 - free_useage))
+        end)
+      )
+    end
     ins_right({
       function()
-        if timer and timer:is_active() ~= true then
-          freeUseage = vim.uv.get_available_memory() / vim.uv.get_total_memory()
-          memoryUseage = string.format("  %.1f%%%%", 100 * (1 - freeUseage))
-          timer:start(3000, 0, function()
-            timer:stop()
-          end)
-        end
-        return memoryUseage
+        return memory_useage
       end,
       color = function()
         local fg = ""
-        local value = 100 * (freeUseage or 0)
+        local value = 100 * (free_useage or 0)
         if value >= 85 then
           fg = colors.green
         elseif value >= 70 then
@@ -349,6 +352,8 @@ return {
         }
       end,
     })
+
+    ins_right(LazyVim.lualine.cmp_source("codeium"))
 
     -- local cpu_useage
     -- local cpu_timer = (vim.uv or vim.loop).new_timer()

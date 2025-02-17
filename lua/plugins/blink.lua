@@ -16,6 +16,7 @@ return {
       opts = {},
       version = not vim.g.lazyvim_blink_main and "*",
     },
+    "codeium.nvim",
   },
   event = "InsertEnter",
 
@@ -276,7 +277,7 @@ return {
         border = "padded",
         winblend = 0,
         winhighlight = "Normal:BlinkCmpSignatureHelp,FloatBorder:BlinkCmpSignatureHelpBorder",
-        scrollbar = false, -- Note that the gutter will be disabled when border ~= 'none'
+        scrollbar = false, -- Note that the gutter will be disabled when border ~= 'none' sna
         -- Which directions to show the window,
         -- falling back to the next direction when there's not enough space,
         -- or another window is in the way
@@ -287,12 +288,19 @@ return {
       },
     },
 
-    -- sources = {
-    --   -- adding any nvim-cmp sources here will enable them
-    --   -- with blink.compat
-    --   compat = {},
-    --   default = { "lsp", "path", "snippets", "buffer" },
-    -- },
+    sources = {
+      -- adding any nvim-cmp sources here will enable them
+      -- with blink.compat
+      compat = { "codeium" },
+      default = { "lsp", "path", "snippets", "buffer", "omni" },
+      providers = {
+        codeium = {
+          kind = "Codeium",
+          score_offset = 100,
+          async = true,
+        },
+      },
+    },
     --
     cmdline = {
       enabled = true,

@@ -1,7 +1,6 @@
 return {
   "SmiteshP/nvim-navic",
   lazy = true,
-  enabled = false,
   init = function()
     vim.g.navic_silence = true
     LazyVim.lsp.on_attach(function(client, buffer)
@@ -49,4 +48,5 @@ return {
       },
     },
   },
+  enabled = false,
 }
