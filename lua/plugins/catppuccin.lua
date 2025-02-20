@@ -2,6 +2,7 @@ return {
   "catppuccin/nvim",
   event = "VeryLazy",
   name = "catppuccin",
+  -- @type
   opts = {
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     background = { -- :h background
@@ -41,7 +42,7 @@ return {
     custom_highlights = function(C)
       return {
         CmpItemMenu = { fg = C.mauve, bg = "NONE" },
-        CmpItemAbbrDeprecated = { fg = "#6e738d", bg = "NONE", strikethrough = true },
+        CmpItemAbbrDeprecated = { fg = C.text, bg = "NONE", strikethrough = true },
         CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
         CmpItemKindKeyword = { fg = C.base, bg = C.red },
         CmpItemKindText = { fg = C.base, bg = C.peach },
@@ -68,11 +69,11 @@ return {
         CmpItemKindOperator = { fg = C.base, bg = C.blue },
         CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
         CmpItemKindCopilot = { fg = C.base, bg = C.teal },
-        Pmenu = { fg = "NONE", bg = "#20252e" },
-        PmenuSel = { bg = "#363a4e", bold = true },
+        Pmenu = { fg = "NONE", bg = C.crust },
+        PmenuSel = { bg = C.surface1, bold = true },
         CmpItemAbbrMatch = { fg = C.mauve, bg = "NONE", bold = true },
         CmpItemAbbrMatchFuzzy = { fg = C.mauve, bg = "NONE", bold = true },
-        CursorLine = { bg = "#363a52" },
+        CursorLine = { bg = C.surface0 },
         CursorLineNr = { fg = C.red, bold = true },
       }
     end,
@@ -103,10 +104,10 @@ return {
           information = { "undercurl" },
         },
       },
-      navic = {
-        enabled = true,
-        custom_bg = "#202328",
-      },
+      -- navic = {
+      --   enabled = true,
+      --   custom_bg = "#202328",
+      -- },
       dap_ui = true,
       neotest = true,
       neotree = true,

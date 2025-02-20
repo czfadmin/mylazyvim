@@ -7,13 +7,13 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   opts = function(_, opts)
-    -- local macchiato = require("catppuccin.palettes").get_palette()
+    local palettes = require("catppuccin.palettes").get_palette(vim.o.background == "dark" and "macchiato" or "latte")
 
     local colors = {
-      inactive_fg = "#bbc2cf",
-      inactive_bg = "#20232a",
-      bg = "#202328",
-      fg = "#bbc2cf",
+      inactive_fg = palettes.surface1,
+      inactive_bg = palettes.overlay0,
+      bg = palettes.base,
+      fg = palettes.surface0,
       yellow = "#ECBE7B",
       cyan = "#008080",
       darkblue = "#081633",
@@ -69,24 +69,24 @@ return {
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",
-        -- theme = "auto",
-        theme = {
-          -- We are going to use lualine_c an lualine_x as left and
-          -- right section. Both are highlighted by c theme .  So we
-          -- are just setting default looks o statusline
-          normal = {
-            c = {
-              fg = colors.fg,
-              bg = colors.bg,
-            },
-          },
-          inactive = {
-            c = {
-              fg = colors.inactive_fg,
-              bg = colors.inactive_bg,
-            },
-          },
-        },
+        theme = "auto",
+        -- theme = {
+        --   -- We are going to use lualine_c an lualine_x as left and
+        --   -- right section. Both are highlighted by c theme .  So we
+        --   -- are just setting default looks o statusline
+        --   normal = {
+        --     c = {
+        --       fg = colors.fg,
+        --       bg = colors.bg,
+        --     },
+        --   },
+        --   inactive = {
+        --     c = {
+        --       fg = colors.inactive_fg,
+        --       bg = colors.inactive_bg,
+        --     },
+        --   },
+        -- },
       },
       sections = {
         -- these are to remove the defaults
@@ -171,12 +171,18 @@ return {
     })
 
     ins_left({
-      -- filesize component
       "filesize",
       cond = conditions.buffer_not_empty,
+      color = {
+        fg = colors.violet,
+        gui = "bold",
+      },
     })
 
-    ins_left({ "location" })
+    ins_left({ "location", color = {
+      fg = colors.violet,
+      gui = "bold",
+    } })
 
     ins_left({
       "diagnostics",
@@ -197,6 +203,10 @@ return {
           fg = colors.cyan,
         },
       },
+      color = {
+        fg = colors.fg,
+        gui = "bold",
+      },
     })
 
     ins_left({
@@ -206,6 +216,11 @@ return {
       cond = function()
         return package.loaded["dap"] and require("dap").status() ~= ""
       end,
+      color = {
+        fg = colors.fg,
+        gui = "bold",
+      },
+
       -- color = colors.red,
     })
 

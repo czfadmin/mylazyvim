@@ -51,7 +51,7 @@ return {
         max_items = 200,
         selection = {
           -- When `true`, will automatically select the first item in the completion list
-          preselect = false,
+          preselect = true,
           -- preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
 
           -- When `true`, inserts the completion item automatically when selecting it

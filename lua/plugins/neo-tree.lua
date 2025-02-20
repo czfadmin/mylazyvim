@@ -13,7 +13,7 @@ return {
     sort_case_insensitive = true, -- used when sorting files and directories in the tree
     sort_function = nil, -- use a custom function for sorting files and directories in the tree
     source_selector = {
-      winbar = true,
+      winbar = false,
       statusline = true,
       sources = {
         {
@@ -184,7 +184,6 @@ return {
       {
         event = "file_added",
         handler = function(args)
-          print(vim.inspect(args))
           vim.cmd("edit! " .. args.source)
         end,
         id = "created_file_and_open_it_later",
