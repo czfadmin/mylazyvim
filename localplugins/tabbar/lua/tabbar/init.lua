@@ -10,12 +10,6 @@ M.options = {
   show_encoding = true,
   show_filetype = true,
   file_path_type = "absolute",
-  colors = {
-    background = "#282c34",
-    foreground = "#abb2bf",
-    modified = "#e5c07b",
-    separator = "#4b5263",
-  },
   show_project_name = true,
 }
 
@@ -72,7 +66,7 @@ local function generate_tabline()
   if M.options.show_filetype then
     local icon, hl = get_file_icon(info)
     icon = (icon or "") .. " "
-    table.insert(middle_components, "%#TabLine#" .. icon)
+    table.insert(middle_components, "%#" .. hl .. "#" .. icon)
     middle_comps_length = middle_comps_length + #icon
   end
 

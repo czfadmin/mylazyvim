@@ -220,8 +220,6 @@ return {
         fg = colors.fg,
         gui = "bold",
       },
-
-      -- color = colors.red,
     })
 
     ins_left({
@@ -256,53 +254,27 @@ return {
     })
 
     -- Add components to right sections
-    --
+
+    ins_right({
+      "searchcount",
+    })
+
+    ins_right({
+      "selectioncount",
+    })
+
+    -- ins_right({
+    --   "windows",
+    -- })
+
+    -- ins_right({
+    --   "tabs",
+    -- })
+
     ins_right({
       "progress",
       color = {
         fg = colors.fg,
-        gui = "bold",
-      },
-    })
-    ins_right({
-      -- Lsp server name .
-      function()
-        local msg = "No Active Lsp"
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-        local clients = vim.lsp.get_clients()
-        if next(clients) == nil then
-          return ""
-        end
-        for _, client in ipairs(clients) do
-          local filetypes = client.config.filetypes
-          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return client.name
-          end
-        end
-        return msg
-      end,
-      color = {
-        fg = "#ffffff",
-        gui = "bold",
-      },
-    })
-
-    ins_right({
-      "o:encoding", -- option component same as &encoding in viml
-      fmt = string.upper, -- I'm not sure why it's upper case either ;)
-      cond = conditions.hide_in_width,
-      color = {
-        fg = colors.green,
-        gui = "bold",
-      },
-    })
-
-    ins_right({
-      "fileformat",
-      fmt = string.upper,
-      icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-      color = {
-        fg = colors.green,
         gui = "bold",
       },
     })
@@ -329,6 +301,29 @@ return {
       cond = conditions.hide_in_width,
     })
 
+    ins_right({
+      -- Lsp server name .
+      function()
+        local msg = "No Active Lsp"
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        local clients = vim.lsp.get_clients()
+        if next(clients) == nil then
+          return ""
+        end
+        for _, client in ipairs(clients) do
+          local filetypes = client.config.filetypes
+          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            return client.name
+          end
+        end
+        return msg
+      end,
+      color = {
+        fg = "#ffffff",
+        gui = "bold",
+      },
+    })
+
     local memory_read_timer = (vim.uv or vim.loop).new_timer()
     local free_useage
 
@@ -343,6 +338,7 @@ return {
         end)
       )
     end
+
     ins_right({
       function()
         return memory_useage
@@ -455,12 +451,37 @@ return {
     -- })
 
     ins_right({
+      "o:encoding", -- option component same as &encoding in viml
+      fmt = string.upper, -- I'm not sure why it's upper case either ;)
+      cond = conditions.hide_in_width,
+      color = {
+        fg = colors.green,
+        gui = "bold",
+      },
+    })
+
+    ins_right({
       function()
         return " " .. os.date("%R")
       end,
-      color = {
-        fg = colors.red,
-      },
+      color = function()
+        return {
+          fg = mode_color[vim.fn.mode()],
+          gui = "bold",
+        }
+      end,
+    })
+
+    ins_right({
+      "fileformat",
+      fmt = string.upper,
+      icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+      color = function()
+        return {
+          fg = mode_color[vim.fn.mode()],
+          gui = "bold",
+        }
+      end,
     })
 
     ins_right({
@@ -473,7 +494,7 @@ return {
         } -- Sets highlighting of component
       end,
       padding = {
-        left = 0,
+        left = 1,
       },
     })
 
