@@ -65,28 +65,9 @@ return {
     local config = {
       options = {
         icons_enabled = true,
-
-        -- Disable sections and component separators
         component_separators = "",
         section_separators = "",
         theme = "auto",
-        -- theme = {
-        --   -- We are going to use lualine_c an lualine_x as left and
-        --   -- right section. Both are highlighted by c theme .  So we
-        --   -- are just setting default looks o statusline
-        --   normal = {
-        --     c = {
-        --       fg = colors.fg,
-        --       bg = colors.bg,
-        --     },
-        --   },
-        --   inactive = {
-        --     c = {
-        --       fg = colors.inactive_fg,
-        --       bg = colors.inactive_bg,
-        --     },
-        --   },
-        -- },
       },
       sections = {
         -- these are to remove the defaults
@@ -118,6 +99,8 @@ return {
     local function ins_right(component)
       table.insert(config.sections.lualine_x, component)
     end
+
+    local trouble = require("trouble")
 
     ins_left({
       function()
@@ -179,18 +162,21 @@ return {
       },
     })
 
-    ins_left({ "location", color = {
-      fg = colors.violet,
-      gui = "bold",
-    } })
+    ins_left({
+      "location",
+      color = {
+        fg = colors.violet,
+        gui = "bold",
+      },
+    })
 
     ins_left({
       "diagnostics",
       sources = { "nvim_diagnostic" },
       symbols = {
-        error = " ",
-        warn = " ",
-        info = " ",
+        error = LazyVim.config.icons.diagnostics.Error,
+        warn = LazyVim.config.icons.diagnostics.Warn,
+        info = LazyVim.config.icons.diagnostics.Info,
       },
       diagnostics_color = {
         color_error = {
@@ -231,7 +217,6 @@ return {
       },
     })
 
-    local trouble = require("trouble")
     local symbols = trouble.statusline({
       mode = "lsp_document_symbols",
       groups = {},
@@ -263,6 +248,10 @@ return {
       "selectioncount",
     })
 
+    ins_right({
+      "fzf",
+    })
+
     -- ins_right({
     --   "windows",
     -- })
@@ -274,7 +263,6 @@ return {
     ins_right({
       "progress",
       color = {
-        fg = colors.fg,
         gui = "bold",
       },
     })
@@ -319,7 +307,6 @@ return {
         return msg
       end,
       color = {
-        fg = "#ffffff",
         gui = "bold",
       },
     })

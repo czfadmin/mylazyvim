@@ -121,10 +121,10 @@ return {
     },
     assets = {
       lsp = {
-        error = "",
-        warn = "  ",
-        hint = "  ",
-        info = "  ",
+        error = LazyVim.config.icons.diagnostics.Error,
+        warn = LazyVim.config.icons.diagnostics.Warn,
+        hint = LazyVim.config.icons.diagnostics.Hint,
+        info = LazyVim.config.icons.diagnostics.Info,
       },
       git = {
         branch = "",

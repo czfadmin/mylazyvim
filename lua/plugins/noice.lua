@@ -1,26 +1,50 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
+  ---@type NoiceConfig
   opts = {
     lsp = {
+      signature = {
+        enabled = true,
+        auto_open = {
+          enabled = true,
+          trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+          luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+          snipppets = true, -- Will open when jumping to placeholders in snippets (Neovim builtin snippets)
+          throttle = 50, -- Debounce lsp signature help request by 50ms
+        },
+        view = nil, -- when nil, use defaults from documentation
+        ---@type NoiceViewOptions
+        opts = {}, -- merged with defaults from documentation
+      },
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
         ["vim.lsp.util.stylize_markdown"] = true,
         ["cmp.entry.get_documentation"] = true,
       },
     },
-    routes = {
-      {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
-        },
-        view = "mini",
-      },
+    -- routes = {
+    --   {
+    --     filter = {
+    --       event = "msg_show",
+    --       any = {
+    --         { find = "%d+L, %d+B" },
+    --         { find = "; after #%d+" },
+    --         { find = "; before #%d+" },
+    --       },
+    --     },
+    --     view = "mini",
+    --   },
+    -- },
+    messages = {
+      -- NOTE: If you enable messages, then the cmdline is enabled automatically.
+      -- This is a current Neovim limitation.
+      enabled = true, -- enables the Noice messages UI
+      view = "notify", -- default view for messages
+      view_error = "notify", -- view for errors
+      view_warn = "notify", -- view for warnings
+      view_history = "messages", -- view for :messages
+      view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
     },
     cmdline = {
       enabled = true,
