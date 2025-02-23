@@ -242,6 +242,9 @@ return {
 
     ins_right({
       "searchcount",
+      color = {
+        fg = colors.yellow,
+      },
     })
 
     ins_right({
