@@ -234,7 +234,7 @@ return {
       Snacks.rename.on_rename_file(data.source, data.destination)
     end
 
-    vim.tbl_deeep_extend("force", opts, _opts)
+    vim.tbl_deep_extend("force", opts, _opts)
 
     local events = require("neo-tree.events")
     opts.event_handlers = opts.event_handlers or {}

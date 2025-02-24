@@ -30,12 +30,16 @@ return {
     },
     {
       "<leader>st",
-      "<cmd>TodoTelescope<cr>",
+      function()
+        Snacks.picker.todo_comments()
+      end,
       desc = "Todo",
     },
     {
       "<leader>sT",
-      "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",
+      function()
+        Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+      end,
       desc = "Todo/Fix/Fixme",
     },
   },
