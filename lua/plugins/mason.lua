@@ -33,8 +33,8 @@ return {
       "codelldb",
       "lua-language-server",
       "json-lsp",
-      "go-debug-adapter",
       "yaml-language-server",
+      "js-debug-adapter",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}
