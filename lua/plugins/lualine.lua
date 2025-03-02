@@ -61,7 +61,6 @@ return {
       end,
     }
 
-    -- Config
     local config = {
       options = {
         icons_enabled = true,
