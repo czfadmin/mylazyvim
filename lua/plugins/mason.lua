@@ -27,7 +27,6 @@ return {
       "ruff",
       "shellcheck",
       "svelte-language-server",
-      -- "typescript-language-server",
       "vtsls",
       "rust-analyzer",
       "codelldb",
@@ -35,6 +34,7 @@ return {
       "json-lsp",
       "go-debug-adapter",
       "yaml-language-server",
+      "tailwindcss-language-server",
     },
   },
   ---@param opts MasonSettings | {ensure_installed: string[]}
