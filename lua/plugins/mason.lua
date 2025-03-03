@@ -17,7 +17,7 @@ return {
       "black",
       "debugpy",
       "delve",
-      "deno",
+      -- "deno",
       "gofumpt",
       "goimports",
       "js-debug-adapter",
