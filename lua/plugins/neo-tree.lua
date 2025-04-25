@@ -126,10 +126,10 @@ return {
         },
         diagnostics = {
           symbols = {
-            hint = "󰌶",
-            info = "",
-            warn = "",
-            error = "",
+            error = LazyVim.config.icons.diagnostics.Error,
+            warn = LazyVim.config.icons.diagnostics.Warn,
+            hint = LazyVim.config.icons.diagnostics.Hint,
+            info = LazyVim.config.icons.diagnostics.Info,
           },
           highlights = {
             hint = "DiagnosticSignHint",
