@@ -1,7 +1,7 @@
 return {
   "czfadmin/readonly.nvim",
   event = "BufReadPre",
-  -- dir = "~/projects/readonly.nvim",
+  -- dir = "~/projects/nvim/readonly.nvim",
   enabled = true,
   opts = {
     restricted_directories = {
