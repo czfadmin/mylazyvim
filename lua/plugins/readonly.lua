@@ -9,7 +9,7 @@ return {
       "/usr", -- 另一个常见的不可编辑目录
       "/var", -- 另一个常见的不可编辑目录
       "/tmp", -- 临时文件目录
-      "/opt",
+      -- "/opt",
       "lua-language-server/.*",
       ".*/node_modules/.*",
     },

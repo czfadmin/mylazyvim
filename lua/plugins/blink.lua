@@ -9,6 +9,7 @@ return {
   },
   dependencies = {
     "rafamadriz/friendly-snippets",
+    "Kaiser-Yang/blink-cmp-avante",
     -- add blink.compat to dependencies
     {
       "saghen/blink.compat",
@@ -290,12 +291,19 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = { "codeium" },
-      default = { "lsp", "path", "snippets", "buffer", "omni" },
+      default = { "lsp", "path", "snippets", "buffer", "omni", "avante" },
       providers = {
         codeium = {
           kind = "Codeium",
           score_offset = 100,
           async = true,
+        },
+        avante = {
+          module = "blink-cmp-avante",
+          name = "Avante",
+          opts = {
+            -- options for blink-cmp-avante
+          },
         },
       },
     },

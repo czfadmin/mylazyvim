@@ -128,10 +128,10 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 4 -- Minimum window width
 opt.wrap = false
 opt.showtabline = 2 -- 总是显示tabline
-
+opt.formatexpr = "v:lua.LazyVim.format.formatexpr()"
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+  -- opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
   opt.foldmethod = "expr"
   opt.foldtext = ""
 else
