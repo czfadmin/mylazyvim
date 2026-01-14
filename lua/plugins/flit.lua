@@ -1,6 +1,6 @@
 return {
   "ggandor/flit.nvim",
-  enabled = true,
+  enabled = false,
   keys = function()
     ---@type LazyKeysSpec[]
     local ret = {}

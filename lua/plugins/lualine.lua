@@ -353,7 +353,7 @@ return {
       end,
     })
 
-    ins_right(LazyVim.lualine.cmp_source("codeium"))
+    -- ins_right(LazyVim.lualine.cmp_source("codeium"))
 
     -- local cpu_useage
     -- local cpu_timer = (vim.uv or vim.loop).new_timer()
@@ -449,17 +449,17 @@ return {
       },
     })
 
-    ins_right({
-      function()
-        return " " .. os.date("%R")
-      end,
-      color = function()
-        return {
-          fg = mode_color[vim.fn.mode()],
-          gui = "bold",
-        }
-      end,
-    })
+    -- ins_right({
+    --   function()
+    --     return " " .. os.date("%R")
+    --   end,
+    --   color = function()
+    --     return {
+    --       fg = mode_color[vim.fn.mode()],
+    --       gui = "bold",
+    --     }
+    --   end,
+    -- })
 
     ins_right({
       "fileformat",
