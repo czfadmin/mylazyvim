@@ -15,7 +15,7 @@ return {
             port = conf.port or 8086,
           }
           if conf.start_neovim then
-            local dap_run = dap.run
+            local dap_run = dap.run 
             dap.run = function(c)
               adapter.port = c.port
               adapter.host = c.host
@@ -38,6 +38,16 @@ return {
             name = "Attach to running Neovim instance (port = 8086)",
             port = 8086,
           },
+        }
+        
+        dap.configurations.javascript = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        },
         }
       end,
     },

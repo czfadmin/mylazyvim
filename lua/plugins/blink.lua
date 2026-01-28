@@ -290,21 +290,21 @@ return {
     sources = {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
-      compat = { "codeium" },
-      default = { "lsp", "path", "snippets", "buffer", "omni", "avante" },
+      compat = {},
+      default = { "lsp", "path", "snippets", "buffer", "omni" },
       providers = {
-        codeium = {
-          kind = "Codeium",
-          score_offset = 100,
-          async = true,
-        },
-        avante = {
-          module = "blink-cmp-avante",
-          name = "Avante",
-          opts = {
-            -- options for blink-cmp-avante
-          },
-        },
+        -- codeium = {
+        --   kind = "Codeium",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
+        -- avante = {
+        --   module = "blink-cmp-avante",
+        --   name = "Avante",
+        --   opts = {
+        --     -- options for blink-cmp-avante
+        --   },
+        -- },
       },
     },
     --
