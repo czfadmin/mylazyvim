@@ -64,7 +64,6 @@ vim.g.trouble_lualine = true
 -- only for diagnostics. The rest of LSP support will still be
 -- provided by rust-analyzer.
 -- vim.g.lazyvim_rust_diagnostics = "bacon-ls"
-
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
@@ -152,18 +151,5 @@ if vim.fn.executable("pwsh") == 1 then
   LazyVim.terminal.setup("pwsh")
 end
 
--- vim.g.clipboard = {
---   name = "WslClipboard",
---   copy = {
---     ["+"] = "clip.exe",
---     ["*"] = "clip.exe",
---   },
---   paste = {
---     ["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---     ["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---   },
---   cache_enabled = 1000,
--- }
---
 vim.g.markdown_recommended_style = 0
 -- vim.g.snacks_anima
