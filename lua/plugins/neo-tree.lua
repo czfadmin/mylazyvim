@@ -3,32 +3,56 @@ return {
   priority = 100,
   lazy = true,
   enabled = true,
+  init = function()
+    -- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
+    -- because `cwd` is not set up properly.
+    vim.api.nvim_create_autocmd("BufEnter", {
+      group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
+      desc = "Start Neo-tree with directory",
+      once = true,
+      callback = function()
+        if package.loaded["neo-tree"] then
+          return
+        else
+          local stats = vim.uv.fs_stat(vim.fn.argv(0))
+          if stats and stats.type == "directory" then
+            require("neo-tree")
+          end
+        end
+      end,
+    })
+  end,
+  deactivate = function()
+    vim.cmd([[Neotree close]])
+  end,
   opts = function(_, opts)
     local _opts = {
+      show_path = true,
+      sources = { "filesystem", "buffers", "git_status" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = "rounded",
       enable_git_status = true,
       enable_diagnostics = true,
       reveal = false,
-      open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
       sort_case_insensitive = true, -- used when sorting files and directories in the tree
       sort_function = nil, -- use a custom function for sorting files and directories in the tree
       source_selector = {
-        winbar = false,
+        winbar = true,
         statusline = true,
         sources = {
           {
             source = "filesystem", -- string
             display_name = " 󰉓 Files ", -- string | nil
           },
-          -- {
-          --   source = "buffers", -- string
-          --   display_name = " 󰈚 Buffers ", -- string | nil
-          -- },
-          -- {
-          --   source = "git_status", -- string
-          --   display_name = " 󰊢 Git ", -- string | nil
-          -- },
+          {
+            source = "buffers", -- string
+            display_name = " 󰈚 Buffers ", -- string | nil
+          },
+          {
+            source = "git_status", -- string
+            display_name = " 󰊢 Git ", -- string | nil
+          },
         },
         content_layout = "start", -- string
         tabs_layout = "equal", -- string
@@ -241,29 +265,9 @@ return {
         -- },
       },
     }
-
-    local function on_move(data)
-      Snacks.rename.on_rename_file(data.source, data.destination)
-    end
-
-    vim.tbl_deep_extend("force", opts, _opts)
-
-    local events = require("neo-tree.events")
-    opts.event_handlers = opts.event_handlers or {}
-    vim.list_extend(opts.event_handlers, {
-      { event = events.FILE_MOVED, handler = on_move },
-      { event = events.FILE_RENAMED, handler = on_move },
-    })
-
-    require("neo-tree").setup(opts)
-    vim.api.nvim_create_autocmd("TermClose", {
-      pattern = "*lazygit",
-      callback = function()
-        if package.loaded["neo-tree.sources.git_status"] then
-          require("neo-tree.sources.git_status").refresh()
-        end
-      end,
-    })
+    -- vim.tbl_deep_extend("force", opts, _opts)
+    -- return opts
+    return _opts
   end,
   keys = {
     {
@@ -290,6 +294,25 @@ return {
     },
   },
   config = function(_, opts)
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+
+    local events = require("neo-tree.events")
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
+    })
+
     require("neo-tree").setup(opts)
+    vim.api.nvim_create_autocmd("TermClose", {
+      pattern = "*lazygit",
+      callback = function()
+        if package.loaded["neo-tree.sources.git_status"] then
+          require("neo-tree.sources.git_status").refresh()
+        end
+      end,
+    })
   end,
 }
