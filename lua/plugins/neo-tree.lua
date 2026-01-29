@@ -50,18 +50,20 @@ return {
       },
       filesystem = {
         find_by_full_path_words = true,
+        hide_hidden = false,
+        hide_dotfiles = false,
+
         filtered_items = {
           visible = true, -- when true, they will just be displayed differently than normal items
           hide_dotfiles = false,
           hide_gitignored = false,
-          hide_hidden = true, -- only works on Windows for hidden files/directories
+          hide_hidden = false, -- only works on Windows for hidden files/directories
           hide_by_name = {
-            "node_modules",
+            -- "node_modules",
             ".git",
           },
           hide_by_pattern = { -- uses glob style patterns
             "*.meta",
-            --"*/src/*/tsconfig.json",
           },
           always_show = { -- remains visible even if other settings would normally hide it
             ".gitignored",
@@ -80,21 +82,31 @@ return {
         },
         window = {
           mappings = {
-            ["<F5>"] = "refresh",
+            ["<bs>"] = "navigate_up",
+            ["."] = "set_root",
+            ["H"] = "toggle_hidden",
+            ["/"] = "fuzzy_finder",
+            ["D"] = "fuzzy_finder_directory",
+            ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
+            -- ["D"] = "fuzzy_sorter_directory",
+            ["f"] = "filter_on_submit",
+            ["<c-x>"] = "clear_filter",
+            ["[g"] = "prev_git_modified",
+            ["]g"] = "next_git_modified",
+            ["o"] = {
+              "show_help",
+              nowait = false,
+              config = { title = "Order by", prefix_key = "o" },
+            },
+            ["oc"] = { "order_by_created", nowait = false },
+            ["od"] = { "order_by_diagnostics", nowait = false },
+            ["og"] = { "order_by_git_status", nowait = false },
+            ["om"] = { "order_by_modified", nowait = false },
+            ["on"] = { "order_by_name", nowait = false },
+            ["os"] = { "order_by_size", nowait = false },
+            ["ot"] = { "order_by_type", nowait = false },
+            ["<f5>"] = "refresh",
             ["P"] = "toggle_preview",
-            -- ["e"] = function()
-            --   vim.api.nvim_exec2("Neotree focus filesystem left", {
-            --     output = false,
-            --   })
-            -- end,
-            -- ["b"] = function()
-            --   vim.api.nvim_exec2("Neotree focus buffers left", { output = false })
-            -- end,
-            -- ["g"] = function()
-            --   vim.api.nvim_exec2("Neotree focus git_status left", {
-            --     output = false,
-            --   })
-            -- end,
           },
         },
       },
@@ -241,6 +253,16 @@ return {
     vim.list_extend(opts.event_handlers, {
       { event = events.FILE_MOVED, handler = on_move },
       { event = events.FILE_RENAMED, handler = on_move },
+    })
+
+    require("neo-tree").setup(opts)
+    vim.api.nvim_create_autocmd("TermClose", {
+      pattern = "*lazygit",
+      callback = function()
+        if package.loaded["neo-tree.sources.git_status"] then
+          require("neo-tree.sources.git_status").refresh()
+        end
+      end,
     })
   end,
   keys = {

@@ -298,13 +298,13 @@ return {
         --   score_offset = 100,
         --   async = true,
         -- },
-        -- avante = {
-        --   module = "blink-cmp-avante",
-        --   name = "Avante",
-        --   opts = {
-        --     -- options for blink-cmp-avante
-        --   },
-        -- },
+        avante = {
+          module = "blink-cmp-avante",
+          name = "Avante",
+          opts = {
+            -- options for blink-cmp-avante
+          },
+        },
       },
     },
     --

@@ -22,6 +22,8 @@ return {
       ["markdown.mdx"] = { "prettier" },
       ["graphql"] = { "prettier" },
       ["handlebars"] = { "prettier" },
+      lua = { "stylua" },
+
       python = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then
           return { "ruff_format" }
@@ -30,27 +32,28 @@ return {
         end
       end,
     },
-    default_format_opts = {
-      timeout_ms = 3000,
-      async = false, -- not recommended to change
-      quiet = false, -- not recommended to change
-      lsp_fallback = true, -- not recommended to change
-    },
+    -- default_format_opts = {
+    --   timeout_ms = 3000,
+    --   async = false, -- not recommended to change
+    --   quiet = false, -- not recommended to change
+    --   lsp_fallback = true, -- not recommended to change
+    -- },
+
     -- If this is set, Conform will run the formatter on save.
     -- It will pass the table to conform.format().
     -- This can also be a function that returns the table.
     -- format_on_save = function(bufnr)
-    -- Disable with a global or buffer-local variable
-    --  if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-    --    return
-    -- end
-    --  return { timeout_ms = 500, lsp_fallback = true }
+    --   -- Disable with a global or buffer-local variable
+    --   if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+    --     return
+    --   end
+    --   return { timeout_ms = 500, lsp_fallback = true }
     -- end,
     -- If this is set, Conform will run the formatter asynchronously after save.
     -- It will pass the table to conform.format().
     -- This can also be a function that returns the table.
     -- format_after_save = {
-    --  lsp_fallback = true,
+    --   lsp_fallback = true,
     -- },
     -- Set the log level. Use `:ConformInfo` to see the location of the log file.
     log_level = vim.log.levels.ERROR,
@@ -64,7 +67,7 @@ return {
       function()
         require("conform").format({ async = true, lsp_fallback = true })
       end,
-      mode = "",
+      mode = { "v", "n" },
       desc = "Format buffer",
     },
     {

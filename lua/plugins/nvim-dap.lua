@@ -39,7 +39,6 @@ return {
             port = 8086,
           },
         }
-        
         dap.configurations.javascript = {
         {
           type = "pwa-node",
