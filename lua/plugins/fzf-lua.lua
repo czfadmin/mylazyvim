@@ -78,9 +78,9 @@ return {
           winopts = {
             layout = "vertical",
             -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
-            height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
+            height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 4) + 0.5) + 16,
             width = 0.5,
-            preview = not vim.tbl_isempty(LazyVim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
+            preview = not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
               layout = "vertical",
               vertical = "down:15,border-top",
               hidden = "hidden",
@@ -93,7 +93,7 @@ return {
           winopts = {
             width = 0.5,
             -- height is number of items, with a max of 80% screen height
-            height = math.floor(math.min(vim.o.lines * 0.8, #items + 2) + 0.5),
+            height = math.floor(math.min(vim.o.lines * 0.8, #items + 4) + 0.5),
           },
         })
       end,
@@ -108,27 +108,9 @@ return {
       },
       files = {
         cwd_prompt = false,
-        git_icons = true,
-        file_icons = true,
-        color_icons = true,
         actions = {
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
-        },
-      },
-
-      blame = {
-        prompt = "Blame> ",
-        cmd = [[git blame --color-lines {file}]],
-        preview = "git show --color {1} -- {file}",
-        -- git-delta is automatically detected as pager, uncomment to disable
-        -- preview_pager = false,
-        actions = {
-          ["enter"] = actions.git_goto_line,
-          ["ctrl-s"] = actions.git_buf_split,
-          ["ctrl-v"] = actions.git_buf_vsplit,
-          ["ctrl-t"] = actions.git_buf_tabedit,
-          ["ctrl-y"] = { fn = actions.git_yank_commit, exec_silent = true },
         },
       },
       grep = {
@@ -194,6 +176,7 @@ return {
     { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
     -- find
     { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+    { "<leader>fB", "<cmd>FzfLua buffers<cr>", desc = "Buffers (all)" },
     { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
     { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
     { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
@@ -202,59 +185,19 @@ return {
     { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
     -- git
     { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+    { "<leader>gd", "<cmd>FzfLua git_diff<cr>", desc = "Git Diff (hunks)" },
+    { "<leader>gl", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
     { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
-    {
-      "<leader>gl",
-      desc = "Git Log",
-      function()
-        Snacks.picker.git_log()
-      end,
-    },
-    {
-      "<leader>gL",
-      function()
-        Snacks.picker.git_log_line()
-      end,
-      desc = "Git Log Line",
-    },
-    {
-      "<leader>gS",
-      function()
-        Snacks.picker.git_stash()
-      end,
-      desc = "Git Stash",
-    },
-    {
-      "<leader>gd",
-      function()
-        Snacks.picker.git_diff()
-      end,
-      desc = "Git Diff (Hunks)",
-    },
-    {
-      "<leader>gf",
-      function()
-        Snacks.picker.git_log_file()
-      end,
-      desc = "Git Log File",
-    },
-
+    { "<leader>gS", "<cmd>FzfLua git_stash<cr>", desc = "Git Stash" },
     -- search
-    {
-      "<leader>s/",
-      function()
-        Snacks.picker.search_history()
-      end,
-      desc = "Search History",
-    },
-
     { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
+    { "<leader>s/", "<cmd>FzfLua search_history<cr>", desc = "Search History" },
     { "<leader>sa", "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
-    { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
+    { "<leader>sb", "<cmd>FzfLua lines<cr>", desc = "Buffer Lines" },
     { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
     { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
-    { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
-    { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>sd", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Diagnostics" },
+    { "<leader>sD", "<cmd>FzfLua diagnostics_document<cr>", desc = "Buffer Diagnostics" },
     { "<leader>sg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
     { "<leader>sG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
     { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
@@ -268,8 +211,8 @@ return {
     { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
     { "<leader>sw", LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
     { "<leader>sW", LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
-    { "<leader>sw", LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
-    { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "v", desc = "Selection (cwd)" },
+    { "<leader>sw", LazyVim.pick("grep_visual"), mode = "x", desc = "Selection (Root Dir)" },
+    { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "x", desc = "Selection (cwd)" },
     { "<leader>uC", LazyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
     {
       "<leader>ss",
@@ -290,5 +233,4 @@ return {
       desc = "Goto Symbol (Workspace)",
     },
   },
-  enabled = true,
 }
