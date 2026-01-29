@@ -17,7 +17,13 @@ return {
       opts = {},
       version = not vim.g.lazyvim_blink_main and "*",
     },
-    "codeium.nvim",
+
+    {
+
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+    },
+    -- "codeium.nvim",
   },
   event = "InsertEnter",
 
